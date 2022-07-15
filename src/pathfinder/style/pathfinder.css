@@ -1,25 +1,36 @@
 .pathfinder{
-    height:60vh;
+    height:100vh;
 }
 .pathfind-board{
-    /* height:fit-content; */
-    /* width:fit-content; */
     position:relative;
     display:grid;
     justify-content:center;
-    justify-items:center;
-    /* align-items:flex; */
     top:50%;
-    gap:0px;
+    transform:translateY(-50%);
 }
 .nodeRow{
-    /* border:1px solid red; */
     display:inline-flex;
     padding:0;
 }
 .node{
-    height:2.5vw;
     width:2.5vw;
+    height:2.5vw;
     border:0.5px solid #287DEB;
 }
 
+.node:hover{
+    outline:2px solid #287DEB;
+    border-radius:0.25em;
+}
+
+.start{
+    background-color:#f5b511
+}
+
+.target{
+    /* background-color:#287DEB; */
+    background-image: linear-gradient(to bottom right,#AD87DE,white 160%);
+    /* box-shadow: 0 0 20px 1px #AD87DE */
+    /* border-radius:50%; */
+    /* border:0.5px solid black; */
+}
