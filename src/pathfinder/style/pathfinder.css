@@ -1,12 +1,29 @@
+:root{
+    --primary:#287DEB;
+    --target:#AD87DE;
+    --from:#e61c27;
+    --to:#2ea3d4;
+    --follow:#f5b511
+}
 .pathfinder{
     height:100vh;
 }
+.pathfinder-nav{
+    background-color: var(--primary);
+    box-shadow: #0000003d 0 5px 10px;
+    width:100vw;
+    overflow:none;
+    height:10vh;
+    color:white;
+    font-weight:bold;
+}
+
 .pathfind-board{
     position:relative;
     display:grid;
     justify-content:center;
-    top:50%;
-    transform:translateY(-50%);
+    top:25%;
+    transform:translateY(-25%);
 }
 .nodeRow{
     display:inline-flex;
@@ -15,22 +32,36 @@
 .node{
     width:2.5vw;
     height:2.5vw;
-    border:0.5px solid #287DEB;
+    border:0.5px solid var(--primary);
 }
 
 .node:hover{
-    outline:2px solid #287DEB;
+    outline:2px solid var(--primary);
     border-radius:0.25em;
 }
 
+
 .start{
-    background-color:#f5b511
+    background-color:var(--follow)
 }
 
 .target{
-    /* background-color:#287DEB; */
     background-image: linear-gradient(to bottom right,#AD87DE,white 160%);
-    /* box-shadow: 0 0 20px 1px #AD87DE */
-    /* border-radius:50%; */
-    /* border:0.5px solid black; */
+}
+
+.visited{
+    animation-name:colour_switch;
+    animation-duration:0.75s;
+    animation-timing-function: ease-in-out;
+    /* animation-iteration-count: infinite; */
+    background-color:var(--to)
+}
+
+@keyframes colour_switch{
+    from { background-color: var(--from); border-radius:50%;}
+    to { background-color:var(--to); border-radius:0%};
+}
+
+.short-path{
+    background-color:var(--follow)
 }
