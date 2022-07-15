@@ -59,9 +59,18 @@
 
 @keyframes colour_switch{
     from { background-color: var(--from); border-radius:50%; transform:rotate(90deg)}
-    to { background-color:var(--to); border-radius:20%; transform:rotate(0)};
+    to { background-color:var(--to); border-radius:0%; transform:rotate(0)};
 }
 
 .short-path{
-    background-color:var(--follow)
+    animation-name:short_colour_switch;
+    animation-duration:0.2s;
+    animation-timing-function: ease-in-out;
+    background-color:var(--follow);
+}
+
+@keyframes short_colour_switch{
+    /* from { background-color: var(--from) } */
+    from { background-color: var(--follow) }
+    to { background-color: var(--follow) }
 }
