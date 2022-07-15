@@ -66,11 +66,11 @@ const getUnvisitedNeighbours = (node:any, grid:any) => {
 export const findShortestPathNodes = (target:any) => {
     const shortestPathNodes:any = []
     let currNode = target
-    console.log("CURRNODE", currNode)
-    console.log("SHORT", shortestPathNodes)
+    // console.log("CURRNODE", currNode)
+    // console.log("SHORT", shortestPathNodes)
     while (currNode !== null){
         shortestPathNodes.unshift(currNode)
-        console.log("CURRNODE AGAIN!", currNode)
+        // console.log("CURRNODE AGAIN!", currNode)
 
         currNode = currNode.prevNode
     }

@@ -26,7 +26,7 @@ function Pathfinder() {
             nodesArr.push(currRow)
         }
         setNodes(nodesArr)
-        console.log(nodesArr)
+        // console.log(nodesArr)
     }
     const createNode = (row:Number, column:Number) => {
         return {
@@ -42,7 +42,7 @@ function Pathfinder() {
     }
 
     const renderBoard = () => {
-        console.log('rendering board')
+        // console.log('rendering board')
         return nodes.map((row:any, rowIdx:Number) => {
             return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col:any, colIdx:any) => {
                 return <div className={`node unvisited ${(colIdx === start.col) && (rowIdx === start.row) ? 'start' : (colIdx === target.col) && (rowIdx === target.row) ? 'target' : ''}`} id={`r${rowIdx}-c${colIdx}`} key={`col${colIdx} row${rowIdx}`}></div>
@@ -62,7 +62,7 @@ function Pathfinder() {
             }
             setTimeout(() => {
                 const node = visitedNodes[i];
-                console.log(node.row, node.column)
+                // console.log(node.row, node.column)
                 document.getElementById(`r${node.row}-c${node.column}`)!.className = `node visited`
             }, 10 * i)
         }
@@ -80,7 +80,7 @@ function Pathfinder() {
 
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
-        console.log(nodes)
+        // console.log(nodes)
         const startIndex = nodes[start.row][start.col]
         const targetIndex = nodes[target.row][target.col]
         const visitedNodes = dijkstra(nodes, startIndex, targetIndex)
