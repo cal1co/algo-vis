@@ -7,7 +7,9 @@ function Pathfinder() {
     const [nodes, setNodes] = useState(Array)
     const [start, setStart] = useState(Object)
     const [target, setTarget] = useState(Object)
-    
+    const [rowLength, setRowLength] = useState(21)
+    const [colLength, setColLength] = useState(35)
+    const [dragging, setDragging] = useState(false)
 
     useEffect(() => {
         setStart({row:10, col:7})
@@ -17,9 +19,9 @@ function Pathfinder() {
 
     const initGrid = () => {
         const nodesArr:Array<Object> = []
-        for (let row = 0; row < 21; row++){
+        for (let row = 0; row < rowLength; row++){
             const currRow = []
-            for (let col = 0; col < 35; col++){
+            for (let col = 0; col < colLength; col++){
                 const currNode = createNode(row, col)
                 currRow.push(currNode)
             }
@@ -40,17 +42,39 @@ function Pathfinder() {
             wall:false,
         }
     }
-
     const renderBoard = () => {
         // console.log('rendering board')
         return nodes.map((row:any, rowIdx:Number) => {
             return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col:any, colIdx:any) => {
-                return <div className={`node unvisited ${(colIdx === start.col) && (rowIdx === start.row) ? 'start' : (colIdx === target.col) && (rowIdx === target.row) ? 'target' : ''}`} id={`r${rowIdx}-c${colIdx}`} key={`col${colIdx} row${rowIdx}`}></div>
+                return <div onMouseDown={() => drawWall(rowIdx, colIdx)} onMouseOver={(() => drawWallDrag(rowIdx, colIdx))} onMouseUp={() => stopWallDraw()}
+                    className={
+                        `node unvisited
+                         ${(colIdx === start.col) && (rowIdx === start.row) ? 'start' 
+                         : (colIdx === target.col) && (rowIdx === target.row) ? 'target' : ''}`
+                        } 
+                        id={`r${rowIdx}-c${colIdx}`} key={`col${colIdx} row${rowIdx}`}></div>
             })}</div>
                 
         })
     }
+    const drawWall = (row:Number, col:Number) => {
+        console.log("WALL BUILT ON", row, col)
+        document.getElementById(`r${row}-c${col}`)!.className = `node unvisited wall`
+        nodes[row][col].wall = true
+        console.log(nodes[row][col].wall)
+        if (!dragging){
+            setDragging(true)
+        }
+    }
 
+    const drawWallDrag = (row:Number, col:Number) => {
+        if (dragging){
+            drawWall(row, col)
+        }
+    }
+    const stopWallDraw = () => {
+        setDragging(false)
+    }
 
     const animateNodesDijkstra = (visitedNodes:any, shortestPathNodes:any) => {
         for (let i = 0; i <= visitedNodes.length; i++){
@@ -73,10 +97,9 @@ function Pathfinder() {
             setTimeout(() => {
                 const node = shortestPathNodes[i]
                 document.getElementById(`r${node.row}-c${node.column}`)!.className = `node short-path`
-            }, 50 * i)
+            }, 30 * i)
         }
     }
-
 
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
@@ -92,6 +115,7 @@ function Pathfinder() {
         <div className="pathfinder">
             <div className="pathfinder-nav">
                 <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
+                <button></button>
             </div>
             <div className="pathfind-board">
                 {renderBoard()}

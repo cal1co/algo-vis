@@ -26,9 +26,9 @@
 
 ## Game Theory 
 
-### *TIC-TAC-TOE:* Mini-Max 
+### Mini-Max with *TIC-TAC-TOE:* 
 
-### *Sudoku:* Backtracking (DFS) 
+### Backtracking (DFS) with *Sudoku:* 
 
 ## Misc 
 
