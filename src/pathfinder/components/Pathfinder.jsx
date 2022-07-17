@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import '../style/pathfinder.css'
 import { dijkstra, findShortestPathNodes } from '../algorithms/dijkstra'
+import { astar } from '../algorithms/a-star'
+
 
 function Pathfinder() {
 
     const [nodes, setNodes] = useState(Array)
     const [start, setStart] = useState({
-        row:0,
-        col:0
+        row:10,
+        col:7
     })
     const [target, setTarget] = useState({
-        row:0,
-        col:0
+        row:10,
+        col:27
     })
     const [rowLength, setRowLength] = useState(21)
     const [colLength, setColLength] = useState(35)
@@ -46,6 +48,8 @@ function Pathfinder() {
             visited:false,
             prevNode:null,
             distance: Infinity,
+            hDistance:null,
+            fScore:Infinity,
             wall:false,
         }
     }
@@ -123,6 +127,14 @@ function Pathfinder() {
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodesDijkstra(visitedNodes, shortestPathNodes)
     }
+    const showAStar = () => {
+        console.log("A* HERE")
+        const startNode = nodes[start.row][start.col]
+        const targetNode = nodes[target.row][target.col]
+        const visitedNodes = astar(nodes, startNode, targetNode)
+        const shortestPathNodes = findShortestPathNodes(targetNode)
+        animateNodesDijkstra(visitedNodes, shortestPathNodes)
+    }
 
     const clearBoard = () => {
         initGrid()
@@ -145,6 +157,7 @@ function Pathfinder() {
         <div className="pathfinder">
             <div className="pathfinder-nav">
                 <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
+                <button className="dijkstra" onClick={showAStar}>A*</button>
                 <button onClick={clearBoard}>Clear</button>
             </div>
             <div className="pathfind-board">

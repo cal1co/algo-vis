@@ -1,26 +1,31 @@
-export const dijkstra = (nodes, start, finish) => {
+export const astar = (nodes, start, finish) => {
     const visitedNodes = []
     start.distance = 0
+    console.log("START", start)
     const unvisitedNodes = fetchNodes(nodes)
-    // sortNodesDist(unvisitedNodes)
-    // console.log(unvisitedNodes)
-
-    // console.log("UNVISITED NODES", unvisitedNodes)
+    
+    unvisitedNodes.forEach(node => {
+        node.hDistance = hDist(node, finish)
+    })
+    console.log(unvisitedNodes)
+    sortNodesDist(unvisitedNodes)
     while (unvisitedNodes.length > 0){
-        sortNodesDist(unvisitedNodes)
-        const nextNode = unvisitedNodes.shift()
-        if (nextNode?.wall){
+        sortNodesFScore(unvisitedNodes)
+        console.log(unvisitedNodes)
+        const node = unvisitedNodes.shift()
+        console.log(node)
+        if (node.wall){
             continue;
         }
-        if (nextNode.distance === Infinity){
+        if (node.distance === Infinity){
             return visitedNodes
         }
-        nextNode.visited = true
-        visitedNodes.push(nextNode)
-        if (nextNode === finish){
+        node.visited = true;
+        visitedNodes.push(node)
+        if (node === finish){
             return visitedNodes
         }
-        updateUnvisitedNeighbours(nextNode, nodes)
+        updateNeighbours(node, nodes)
     }
 }
 
@@ -36,13 +41,30 @@ const fetchNodes = (grid) => {
 
 const sortNodesDist = (unvisitedNodes) => {
     unvisitedNodes.sort((a, b) => a.distance - b.distance)
+    // console.log(unvisitedNodes)
 }
 
-const updateUnvisitedNeighbours = (node, grid) => {
-    const unvisitedNeighbours = getUnvisitedNeighbours(node, grid)
-    for (const neighbour of unvisitedNeighbours){
+const sortNodesFScore = (unvisitedNodes) => {
+    unvisitedNodes.sort((a, b) => a.fScore - b.fScore)
+    unvisitedNodes.forEach((e) => {
+        if (e.fScore === 20){
+            console.log(unvisitedNodes.indexOf(e))
+        }
+    })
+}
+
+const hDist = (currNode, finish) => {
+    const x = Math.abs(currNode.row - finish.row)
+    const y = Math.abs(currNode.column - finish.column)
+    return x + y
+}
+
+const updateNeighbours = (node, grid) => {
+    const neighbours = getUnvisitedNeighbours(node, grid)
+    for (const neighbour of neighbours){
         neighbour.distance = node.distance + 1
         neighbour.prevNode = node
+        neighbour.fScore = neighbour.distance + neighbour.hDistance
     }
 }
 
@@ -65,16 +87,11 @@ const getUnvisitedNeighbours = (node, grid) => {
 }
 
 
-
 export const findShortestPathNodes = (target) => {
     const shortestPathNodes = []
     let currNode = target
-    // console.log("CURRNODE", currNode)
-    // console.log("SHORT", shortestPathNodes)
     while (currNode !== null){
         shortestPathNodes.unshift(currNode)
-        // console.log("CURRNODE AGAIN!", currNode)
-
         currNode = currNode.prevNode
     }
     return shortestPathNodes
