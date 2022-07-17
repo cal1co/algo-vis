@@ -28,6 +28,7 @@ function Pathfinder() {
             nodesArr.push(currRow)
         }
         setNodes(nodesArr)
+        return nodesArr
         // console.log(nodesArr)
     }
     const createNode = (row:Number, column:Number) => {
@@ -42,9 +43,9 @@ function Pathfinder() {
             wall:false,
         }
     }
-    const renderBoard = () => {
-        // console.log('rendering board')
-        return nodes.map((row:any, rowIdx:Number) => {
+    const renderBoard = (inputNodes=nodes) => {
+        console.log('rendering board', inputNodes === nodes)
+        return inputNodes.map((row:any, rowIdx:Number) => {
             return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col:any, colIdx:any) => {
                 return <div onMouseDown={() => drawWall(rowIdx, colIdx)} onMouseOver={(() => drawWallDrag(rowIdx, colIdx))} onMouseUp={() => stopWallDraw()}
                     className={
@@ -54,7 +55,6 @@ function Pathfinder() {
                         } 
                         id={`r${rowIdx}-c${colIdx}`} key={`col${colIdx} row${rowIdx}`}></div>
             })}</div>
-                
         })
     }
     const drawWall = (row:Number, col:Number) => {
@@ -104,18 +104,43 @@ function Pathfinder() {
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
         // console.log(nodes)
-        const startIndex = nodes[start.row][start.col]
-        const targetIndex = nodes[target.row][target.col]
-        const visitedNodes = dijkstra(nodes, startIndex, targetIndex)
-        const shortestPathNodes = findShortestPathNodes(targetIndex)
+        const startNode = nodes[start.row][start.col]
+        const targetNode = nodes[target.row][target.col]
+        const visitedNodes = dijkstra(nodes, startNode, targetNode)
+        const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodesDijkstra(visitedNodes, shortestPathNodes)
+    }
+
+    const clearBoard = () => {
+        console.log('clearing')
+        const inputNodes = initGrid()
+        // console.log(inputNodes)
+        // renderBoard(inputNodes)
+        for (let row = 0; row < rowLength; row++){
+            for (let column = 0; column < colLength; column++){
+                if (row === start.row && column == start.col){
+                    document.getElementById(`r${row}-c${column}`)!.className = `node start unvisited`
+                    continue;
+                }
+                if (row === target.row && column == target.col){
+                    document.getElementById(`r${row}-c${column}`)!.className = `node target unvisited`
+                    continue;
+                }
+                document.getElementById(`r${row}-c${column}`)!.className = `node unvisited`
+            }
+        }
+        // nodes.forEach((e:any, idx:number) => {
+        //     console.log(e)
+        //     let item = document.getElementById(`r${e.row}-c${e.column}`)!.className=`node unvisited`
+        //     console.log(item)
+        // })
     }
 
     return (
         <div className="pathfinder">
             <div className="pathfinder-nav">
                 <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
-                <button></button>
+                <button onClick={clearBoard}>Clear</button>
             </div>
             <div className="pathfind-board">
                 {renderBoard()}
