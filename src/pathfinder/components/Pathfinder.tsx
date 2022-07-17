@@ -5,8 +5,14 @@ import { dijkstra, findShortestPathNodes } from '../algorithms/dijkstra'
 function Pathfinder() {
 
     const [nodes, setNodes] = useState(Array)
-    const [start, setStart] = useState(Object)
-    const [target, setTarget] = useState(Object)
+    const [start, setStart] = useState({
+        row:0,
+        col:0
+    })
+    const [target, setTarget] = useState({
+        row:0,
+        col:0
+    })
     const [rowLength, setRowLength] = useState(21)
     const [colLength, setColLength] = useState(35)
     const [dragging, setDragging] = useState(false)
@@ -45,7 +51,7 @@ function Pathfinder() {
     }
     const renderBoard = (inputNodes=nodes) => {
         console.log('rendering board', inputNodes === nodes)
-        return inputNodes.map((row:any, rowIdx:Number) => {
+        return inputNodes.map((row:any, rowIdx:number) => {
             return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col:any, colIdx:any) => {
                 return <div onMouseDown={() => drawWall(rowIdx, colIdx)} onMouseOver={(() => drawWallDrag(rowIdx, colIdx))} onMouseUp={() => stopWallDraw()}
                     className={
@@ -57,17 +63,25 @@ function Pathfinder() {
             })}</div>
         })
     }
-    const drawWall = (row:Number, col:Number) => {
+    const drawWall = (row:number, col:number) => {
         console.log("WALL BUILT ON", row, col)
-        document.getElementById(`r${row}-c${col}`)!.className = `node unvisited wall`
-        nodes[row][col].wall = true
-        console.log(nodes[row][col].wall)
+        const node = document.getElementById(`r${row}-c${col}`)
+        const [...nodeClassArr] = node.classList
+        if (!(nodeClassArr.includes("start") || nodeClassArr.includes("target"))){
+            if (nodeClassArr.includes("wall")){
+                node!.className = `node unvisited`
+                nodes[row][col].wall = false
+            } else {
+                node!.className = `node unvisited wall`
+                nodes[row][col].wall = true
+            }
+        }
         if (!dragging){
             setDragging(true)
         }
     }
 
-    const drawWallDrag = (row:Number, col:Number) => {
+    const drawWallDrag = (row:number, col:number) => {
         if (dragging){
             drawWall(row, col)
         }
@@ -103,7 +117,6 @@ function Pathfinder() {
 
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
-        // console.log(nodes)
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = dijkstra(nodes, startNode, targetNode)
