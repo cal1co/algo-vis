@@ -1,26 +1,8 @@
-// 1. node 
-// 2. find nodes neighbours
-// 3. choose in clockwise, add neighbours to stack 
-// 4. repeat 
-// 5. if no neighbours, go down stack
-
-
-/**
- * let unvisitedNodes ...
- * while(unvisitedNodes.length > 0){
- * let node = unvisitedNodes.shift()
- * if (node.finish){
- * return true} else {
- * unvisitedNodes.unshift(...node.children)
- * }
- * }
- */
 
 export const depthFirstSearch = (nodes, start, finish) => {
     const visitedNodes = []
     const stack = []
     stack.push(start)
-    console.log(stack)
     
     while (stack.length >  0){
         const node = stack.shift()
@@ -32,9 +14,6 @@ export const depthFirstSearch = (nodes, start, finish) => {
         if (node.wall){
             continue;
         }
-        // if (node.distance === Infinity){
-        //     return visitedNodes
-        // }
         if (node === undefined){
             return visitedNodes
         }
@@ -44,27 +23,9 @@ export const depthFirstSearch = (nodes, start, finish) => {
             return visitedNodes
         }
         const neighbours = getUnvisitedNeighbours(node, nodes)
-        // console.log(neighbours)
-        let sortedNeighbours = sortNeighbours(neighbours)
-        // stack.unshift(...sortedNeighbours)
-        console.log(neighbours)
         stack.unshift(...neighbours)
         updateNeighbours(node, nodes)
-
     }
-}
-
-const sortNeighbours = (neighbours) => {
-    const sorted = neighbours.sort((a, b) => {
-        const difference = a.row - b.row 
-        switch (difference) {
-            case 0: 
-                return b.column - a.column 
-            default:
-                return difference
-        }
-    })
-    return sorted
 }
 
  const updateNeighbours = (node, grid) => {
