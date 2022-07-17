@@ -68,7 +68,7 @@ function Pathfinder() {
         })
     }
     const drawWall = (row, col) => {
-        console.log("WALL BUILT ON", row, col)
+        // console.log("WALL BUILT ON", row, col)
         const node = document.getElementById(`r${row}-c${col}`)
         const [...nodeClassArr] = node.classList
         if (!(nodeClassArr.includes("start") || nodeClassArr.includes("target"))){
@@ -94,7 +94,7 @@ function Pathfinder() {
         setDragging(false)
     }
 
-    const animateNodesDijkstra = (visitedNodes, shortestPathNodes) => {
+    const animateNodes = (visitedNodes, shortestPathNodes) => {
         for (let i = 0; i <= visitedNodes.length; i++){
             if (i === visitedNodes.length){
                 setTimeout(() => {
@@ -125,7 +125,7 @@ function Pathfinder() {
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = dijkstra(nodes, startNode, targetNode)
         const shortestPathNodes = findShortestPathNodes(targetNode)
-        animateNodesDijkstra(visitedNodes, shortestPathNodes)
+        animateNodes(visitedNodes, shortestPathNodes)
     }
     const showAStar = () => {
         console.log("A* HERE")
@@ -133,7 +133,7 @@ function Pathfinder() {
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = astar(nodes, startNode, targetNode)
         const shortestPathNodes = findShortestPathNodes(targetNode)
-        animateNodesDijkstra(visitedNodes, shortestPathNodes)
+        animateNodes(visitedNodes, shortestPathNodes)
     }
 
     const clearBoard = () => {

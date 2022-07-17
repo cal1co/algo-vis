@@ -2,10 +2,6 @@ export const dijkstra = (nodes, start, finish) => {
     const visitedNodes = []
     start.distance = 0
     const unvisitedNodes = fetchNodes(nodes)
-    // sortNodesDist(unvisitedNodes)
-    // console.log(unvisitedNodes)
-
-    // console.log("UNVISITED NODES", unvisitedNodes)
     while (unvisitedNodes.length > 0){
         sortNodesDist(unvisitedNodes)
         const nextNode = unvisitedNodes.shift()
@@ -69,12 +65,8 @@ const getUnvisitedNeighbours = (node, grid) => {
 export const findShortestPathNodes = (target) => {
     const shortestPathNodes = []
     let currNode = target
-    // console.log("CURRNODE", currNode)
-    // console.log("SHORT", shortestPathNodes)
     while (currNode !== null){
         shortestPathNodes.unshift(currNode)
-        // console.log("CURRNODE AGAIN!", currNode)
-
         currNode = currNode.prevNode
     }
     return shortestPathNodes

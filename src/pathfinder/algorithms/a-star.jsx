@@ -9,7 +9,9 @@ export const astar = (nodes, start, finish) => {
     sortNodesDist(unvisitedNodes)
     while (unvisitedNodes.length > 0){
         sortNodesFScore(unvisitedNodes)
+        // console.log(unvisitedNodes)
         const node = unvisitedNodes.shift()
+        console.log(node.fScore, node.distance, node.hDistance)
         if (node.wall){
             continue;
         }
@@ -40,8 +42,14 @@ const sortNodesDist = (unvisitedNodes) => {
 }
 
 const sortNodesFScore = (unvisitedNodes) => {
-    unvisitedNodes.sort((a, b) => a.fScore - b.fScore)
-    unvisitedNodes.forEach((e) => {
+    unvisitedNodes.sort((a, b) => {
+        const diff = a.fScore - b.fScore 
+        switch (diff) {
+            case 0: 
+                return a.hDistance - b.hDistance
+            default:
+                return diff
+            }
     })
 }
 
