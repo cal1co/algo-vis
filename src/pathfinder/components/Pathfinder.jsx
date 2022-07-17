@@ -24,7 +24,7 @@ function Pathfinder() {
     },[setNodes])
 
     const initGrid = () => {
-        const nodesArr:Array<Object> = []
+        const nodesArr = []
         for (let row = 0; row < rowLength; row++){
             const currRow = []
             for (let col = 0; col < colLength; col++){
@@ -37,7 +37,7 @@ function Pathfinder() {
         return nodesArr
         // console.log(nodesArr)
     }
-    const createNode = (row:Number, column:Number) => {
+    const createNode = (row, column) => {
         return {
             row,
             column,
@@ -51,8 +51,8 @@ function Pathfinder() {
     }
     const renderBoard = (inputNodes=nodes) => {
         console.log('rendering board', inputNodes === nodes)
-        return inputNodes.map((row:any, rowIdx:number) => {
-            return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col:any, colIdx:any) => {
+        return inputNodes.map((row, rowIdx) => {
+            return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col, colIdx) => {
                 return <div onMouseDown={() => drawWall(rowIdx, colIdx)} onMouseOver={(() => drawWallDrag(rowIdx, colIdx))} onMouseUp={() => stopWallDraw()}
                     className={
                         `node unvisited
@@ -63,16 +63,16 @@ function Pathfinder() {
             })}</div>
         })
     }
-    const drawWall = (row:number, col:number) => {
+    const drawWall = (row, col) => {
         console.log("WALL BUILT ON", row, col)
         const node = document.getElementById(`r${row}-c${col}`)
         const [...nodeClassArr] = node.classList
         if (!(nodeClassArr.includes("start") || nodeClassArr.includes("target"))){
             if (nodeClassArr.includes("wall")){
-                node!.className = `node unvisited`
+                node.className = `node unvisited`
                 nodes[row][col].wall = false
             } else {
-                node!.className = `node unvisited wall`
+                node.className = `node unvisited wall`
                 nodes[row][col].wall = true
             }
         }
@@ -81,7 +81,7 @@ function Pathfinder() {
         }
     }
 
-    const drawWallDrag = (row:number, col:number) => {
+    const drawWallDrag = (row, col) => {
         if (dragging){
             drawWall(row, col)
         }
@@ -90,7 +90,7 @@ function Pathfinder() {
         setDragging(false)
     }
 
-    const animateNodesDijkstra = (visitedNodes:any, shortestPathNodes:any) => {
+    const animateNodesDijkstra = (visitedNodes, shortestPathNodes) => {
         for (let i = 0; i <= visitedNodes.length; i++){
             if (i === visitedNodes.length){
                 setTimeout(() => {
@@ -101,16 +101,16 @@ function Pathfinder() {
             setTimeout(() => {
                 const node = visitedNodes[i];
                 // console.log(node.row, node.column)
-                document.getElementById(`r${node.row}-c${node.column}`)!.className = `node visited`
+                document.getElementById(`r${node.row}-c${node.column}`).className = `node visited`
             }, 10 * i)
         }
     }
 
-    const animateShortestPath = (shortestPathNodes:any) => {
+    const animateShortestPath = (shortestPathNodes) => {
         for (let i = 0; i < shortestPathNodes.length; i++){
             setTimeout(() => {
                 const node = shortestPathNodes[i]
-                document.getElementById(`r${node.row}-c${node.column}`)!.className = `node short-path`
+                document.getElementById(`r${node.row}-c${node.column}`).className = `node short-path`
             }, 30 * i)
         }
     }
@@ -129,14 +129,14 @@ function Pathfinder() {
         for (let row = 0; row < rowLength; row++){
             for (let column = 0; column < colLength; column++){
                 if (row === start.row && column == start.col){
-                    document.getElementById(`r${row}-c${column}`)!.className = `node start unvisited`
+                    document.getElementById(`r${row}-c${column}`).className = `node start unvisited`
                     continue;
                 }
                 if (row === target.row && column == target.col){
-                    document.getElementById(`r${row}-c${column}`)!.className = `node target unvisited`
+                    document.getElementById(`r${row}-c${column}`).className = `node target unvisited`
                     continue;
                 }
-                document.getElementById(`r${row}-c${column}`)!.className = `node unvisited`
+                document.getElementById(`r${row}-c${column}`).className = `node unvisited`
             }
         }
     }
