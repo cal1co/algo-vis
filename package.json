@@ -2,7 +2,6 @@
   "name": "algo-vis",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://cal1co.github.io/algo-vis",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
