@@ -62,7 +62,7 @@
 @keyframes colour_switch{
     0% { background-color: var(--follow); border-radius:50%; transform:rotate(90deg)}
     20% { background-color: var(--from); border-radius:50%; transform:rotate(90deg)}
-    100% { background-color:var(--to); border-radius:0%; transform:rotate(0);};
+    100% { background-color:var(--to); border-radius:1%; transform:rotate(0);};
 }
 
 .short-path{
