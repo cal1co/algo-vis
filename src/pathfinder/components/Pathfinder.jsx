@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import '../style/pathfinder.css'
 import { dijkstra, findShortestPathNodes } from '../algorithms/dijkstra'
 import { astar } from '../algorithms/a-star'
+import { depthFirstSearch } from '../algorithms/depthFirstSearch'
 
 
 function Pathfinder() {
@@ -136,6 +137,15 @@ function Pathfinder() {
         animateNodes(visitedNodes, shortestPathNodes)
     }
 
+    const showDFS = () => {
+        console.log('DFS HERE')
+        const startNode = nodes[start.row][start.col]
+        const targetNode = nodes[target.row][target.col]
+        const visitedNodes = depthFirstSearch(nodes, startNode, targetNode)
+        const shortestPathNodes = findShortestPathNodes(targetNode)
+        animateNodes(visitedNodes, shortestPathNodes)
+    }
+
     const clearBoard = () => {
         initGrid()
         for (let row = 0; row < rowLength; row++){
@@ -158,6 +168,7 @@ function Pathfinder() {
             <div className="pathfinder-nav">
                 <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
                 <button className="dijkstra" onClick={showAStar}>A*</button>
+                <button className="dijkstra" onClick={showDFS}>DFS</button>
                 <button onClick={clearBoard}>Clear</button>
             </div>
             <div className="pathfind-board">
