@@ -1,19 +1,15 @@
 export const astar = (nodes, start, finish) => {
     const visitedNodes = []
     start.distance = 0
-    console.log("START", start)
     const unvisitedNodes = fetchNodes(nodes)
     
     unvisitedNodes.forEach(node => {
         node.hDistance = hDist(node, finish)
     })
-    console.log(unvisitedNodes)
     sortNodesDist(unvisitedNodes)
     while (unvisitedNodes.length > 0){
         sortNodesFScore(unvisitedNodes)
-        console.log(unvisitedNodes)
         const node = unvisitedNodes.shift()
-        console.log(node)
         if (node.wall){
             continue;
         }
@@ -41,15 +37,11 @@ const fetchNodes = (grid) => {
 
 const sortNodesDist = (unvisitedNodes) => {
     unvisitedNodes.sort((a, b) => a.distance - b.distance)
-    // console.log(unvisitedNodes)
 }
 
 const sortNodesFScore = (unvisitedNodes) => {
     unvisitedNodes.sort((a, b) => a.fScore - b.fScore)
     unvisitedNodes.forEach((e) => {
-        if (e.fScore === 20){
-            console.log(unvisitedNodes.indexOf(e))
-        }
     })
 }
 
@@ -84,15 +76,4 @@ const getUnvisitedNeighbours = (node, grid) => {
         neighbours.push(grid[row][column + 1])
     }
     return neighbours.filter((a) => !a.visited)
-}
-
-
-export const findShortestPathNodes = (target) => {
-    const shortestPathNodes = []
-    let currNode = target
-    while (currNode !== null){
-        shortestPathNodes.unshift(currNode)
-        currNode = currNode.prevNode
-    }
-    return shortestPathNodes
 }
