@@ -112,10 +112,7 @@ function Pathfinder() {
     }
 
     const clearBoard = () => {
-        console.log('clearing')
-        const inputNodes = initGrid()
-        // console.log(inputNodes)
-        // renderBoard(inputNodes)
+        initGrid()
         for (let row = 0; row < rowLength; row++){
             for (let column = 0; column < colLength; column++){
                 if (row === start.row && column == start.col){
@@ -129,11 +126,6 @@ function Pathfinder() {
                 document.getElementById(`r${row}-c${column}`)!.className = `node unvisited`
             }
         }
-        // nodes.forEach((e:any, idx:number) => {
-        //     console.log(e)
-        //     let item = document.getElementById(`r${e.row}-c${e.column}`)!.className=`node unvisited`
-        //     console.log(item)
-        // })
     }
 
     return (
