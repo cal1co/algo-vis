@@ -2,13 +2,13 @@
   "name": "algo-vis",
   "private": true,
   "version": "0.0.0",
-  "homepage":"https://cal1co.github.io",
+  "homepage": "https://cal1co.github.io/algo-vis",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.0.0",
@@ -29,7 +29,7 @@
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "typescript": "^4.6.3",
-    "vite": "^2.9.9"
+    "vite": "^2.9.14"
   },
   "jest": {
     "testEnvironment": "jsdom",
