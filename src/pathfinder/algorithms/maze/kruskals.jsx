@@ -7,7 +7,6 @@ export const kruskals = (nodes) => {
     for (let i = 0; i < unvisitedNodes.length; i++){
         const currNode = unvisitedNodes[i]
         if (currNode.row % 2 === 1 || currNode.column % 2 === 1){
-            currNode.wall = true 
             wallNodes.push(currNode)
         } else {
             const newSet = new Set()
@@ -15,20 +14,14 @@ export const kruskals = (nodes) => {
             blankNodes.push(currNode)
         }
     }
-
     while (sets.length > 1){
-        // 1. set node 
         const node = blankNodes.shift() 
-        // 2. find the edge node 
         const edge = getRandomNeighbour(node, nodes)
-        // 3. find set that has node and the set that has the edge
-        let nodeIdx;
         let nodeSet;
         let edgeIdx;
         let edgeSet; 
         sets.forEach((set, idx) => {
             if (set.has(node)){
-                nodeIdx = idx
                 nodeSet = set
             }
             if (set.has(edge[1])){
@@ -36,8 +29,6 @@ export const kruskals = (nodes) => {
                 edgeSet = set
             }
         })
-        
-        // 4. find if the edge node is in the set 
         if (!nodeSet.has(edge[1])){
             if (edgeSet.size > 1){
                 edgeSet.forEach((e) => {
@@ -52,6 +43,8 @@ export const kruskals = (nodes) => {
         }
         blankNodes.push(node)
     }
+    console.log("set size", sets[0].size)
+    console.log('wallNodes length', wallNodes.length)
     return wallNodes
 }
 
@@ -64,7 +57,6 @@ const fetchNodes = (grid) => {
     }
     return nodes
 }
-
 // Durstenfeld in-place version of fisher-yates shuffle
 const durstenfeldShuffle = (nodes) => {
     for (let i = nodes.length -1; i > 0; i--){
@@ -108,17 +100,5 @@ const getRandomNeighbour = (node, grid) => {
     if (neighbours == undefined || neighbours.length < 2){
         neighbours = getRandomNeighbour(node, grid)
     } 
-    // for (const neighbour of neighbours){
-    //     if (neighbour.startNode || neighbour.finishNode){
-    //         neighbours = getRandomNeighbour(node, grid)
-    //     }
-    // }
-    updateNeighbours(neighbours)
     return neighbours
-}
-
-const updateNeighbours = (neighbours) => {
-    for (const neighbour of neighbours){
-        neighbour.visited = true 
-    }
 }

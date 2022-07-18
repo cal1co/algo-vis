@@ -135,6 +135,7 @@ function Pathfinder() {
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = astar(nodes, startNode, targetNode)
+        console.log(visitedNodes)
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
     }
@@ -157,19 +158,21 @@ function Pathfinder() {
 
     // Walls
     const animateWalls = (visitedNodes) => {
+        console.log(nodes[start.row - 1][start.col])
+        console.log(nodes[start.row + 1][start.col])
+        console.log(nodes[start.row][start.col - 1])
+        console.log(nodes[start.row][start.col + 1])
+        console.log("vis nodes length", visitedNodes.length)
         for (let i = 0; i < visitedNodes.length; i++){
-            setTimeout(() => {
+            // setTimeout(() => {
                 const node = visitedNodes[i];
-                // console.log(node.row, node.column)
                 nodes[node.row][node.column].wall = true
                 document.getElementById(`r${node.row}-c${node.column}`).className = `node unvisited wall`
-            }, 10 * i)
+            // }, 5 * i)
         }
     }
     const showKruskals = () => {
-        const startNode = nodes[start.row][start.col]
-        const targetNode = nodes[target.row][target.col]
-        const wallPath = kruskals(nodes, startNode, targetNode)
+        const wallPath = kruskals(nodes)
         animateWalls(wallPath)
     }
 

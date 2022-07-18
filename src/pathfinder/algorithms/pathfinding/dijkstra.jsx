@@ -60,8 +60,6 @@ const getUnvisitedNeighbours = (node, grid) => {
     return neighbours.filter((a) => !a.visited)
 }
 
-
-
 export const findShortestPathNodes = (target) => {
     const shortestPathNodes = []
     let currNode = target

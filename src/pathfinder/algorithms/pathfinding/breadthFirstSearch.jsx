@@ -2,10 +2,8 @@ export const breadthFirstSearch = (nodes, start, finish) => {
     const visitedNodes = []
     const stack = []
     stack.push(start)
-    
     while (stack.length >  0){
         const node = stack.shift()
-        // console.log(stack)
         if(node === undefined){
             return visitedNodes
         }
@@ -26,10 +24,6 @@ export const breadthFirstSearch = (nodes, start, finish) => {
         const neighbours = getUnvisitedNeighbours(node, nodes)
         stack.push(...neighbours)
         updateNeighbours(node, nodes, neighbours)
-        // if (visitedNodes.length === 1000){
-        //     // console.log(stack)
-        //     return visitedNodes
-        // }
     }
 }
 
