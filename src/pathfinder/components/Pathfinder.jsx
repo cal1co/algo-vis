@@ -158,17 +158,12 @@ function Pathfinder() {
 
     // Walls
     const animateWalls = (visitedNodes) => {
-        console.log(nodes[start.row - 1][start.col])
-        console.log(nodes[start.row + 1][start.col])
-        console.log(nodes[start.row][start.col - 1])
-        console.log(nodes[start.row][start.col + 1])
-        console.log("vis nodes length", visitedNodes.length)
         for (let i = 0; i < visitedNodes.length; i++){
-            // setTimeout(() => {
+            setTimeout(() => {
                 const node = visitedNodes[i];
                 nodes[node.row][node.column].wall = true
                 document.getElementById(`r${node.row}-c${node.column}`).className = `node unvisited wall`
-            // }, 5 * i)
+            }, 4 * i)
         }
     }
     const showKruskals = () => {
@@ -192,6 +187,29 @@ function Pathfinder() {
             }
         }
     }
+    const clearSolution = () => {
+        nodes.forEach((nodeRow) => {
+            nodeRow.forEach((node) => {
+                node.visited = false
+                node.prevNode = null
+                node.distance = Infinity
+                node.hDistance = null
+                node.fScore = Infinity
+                const currNode = document.getElementById(`r${node.row}-c${node.column}`)
+                currNode.className = `node unvisited`
+                if (node.finishNode){
+                    currNode.className = `node unvisited target`
+                }
+                if (node.startNode){
+                    currNode.className = `node unvisited start`
+                }
+                if (node.wall){
+                    currNode.className = `node unvisited wall`
+                }
+
+            })
+        })
+    }
 
     return (
         <div className="pathfinder">
@@ -201,6 +219,7 @@ function Pathfinder() {
                 <button className="BFS" onClick={showBFS}>BFS</button>
                 <button className="DFS" onClick={showDFS}>DFS</button>
                 <button onClick={clearBoard}>Clear</button>
+                <button onClick={clearSolution}>Clear Solution</button>
                 <button className="Kruskals" onClick={showKruskals}>Kruskals</button>
 
             </div>

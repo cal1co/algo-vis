@@ -43,8 +43,6 @@ export const kruskals = (nodes) => {
         }
         blankNodes.push(node)
     }
-    console.log("set size", sets[0].size)
-    console.log('wallNodes length', wallNodes.length)
     return wallNodes
 }
 
