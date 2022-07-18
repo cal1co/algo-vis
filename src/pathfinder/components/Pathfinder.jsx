@@ -5,7 +5,9 @@ import { dijkstra, findShortestPathNodes } from '../algorithms/pathfinding/dijks
 import { astar } from '../algorithms/pathfinding/a-star'
 import { depthFirstSearch } from '../algorithms/pathfinding/depthFirstSearch'
 import { breadthFirstSearch } from '../algorithms/pathfinding/breadthFirstSearch'
+
 import { kruskals } from '../algorithms/maze/kruskals'
+import { randomWalls } from '../algorithms/maze/randomWalls'
 
 function Pathfinder() {
 
@@ -167,8 +169,13 @@ function Pathfinder() {
         }
     }
     const showKruskals = () => {
+        // clearBoard()
         const wallPath = kruskals(nodes)
         animateWalls(wallPath)
+    }
+    const showRandom = () => {
+        const randomPath = randomWalls(nodes)
+        animateWalls(randomPath)
     }
 
     const clearBoard = () => {
@@ -221,6 +228,7 @@ function Pathfinder() {
                 <button onClick={clearBoard}>Clear</button>
                 <button onClick={clearSolution}>Clear Solution</button>
                 <button className="Kruskals" onClick={showKruskals}>Kruskals</button>
+                <button className="Random" onClick={showRandom}>Random</button>
 
             </div>
             <div className="pathfind-board">
