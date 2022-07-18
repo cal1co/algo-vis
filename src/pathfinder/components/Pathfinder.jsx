@@ -110,7 +110,13 @@ function Pathfinder() {
             setTimeout(() => {
                 const node = visitedNodes[i];
                 // console.log(node.row, node.column)
-                document.getElementById(`r${node.row}-c${node.column}`).className = `node visited`
+                const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
+                nodeHTMLElem.className = `node visited`
+                if (node.startNode){
+                    console.log(node)
+                    console.log("THIS IS START")
+                    nodeHTMLElem.className = `node start`
+                }
             }, 10 * i)
         }
     }
