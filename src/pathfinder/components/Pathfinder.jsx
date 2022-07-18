@@ -3,7 +3,7 @@ import '../style/pathfinder.css'
 import { dijkstra, findShortestPathNodes } from '../algorithms/dijkstra'
 import { astar } from '../algorithms/a-star'
 import { depthFirstSearch } from '../algorithms/depthFirstSearch'
-
+import { breadthFirstSearch } from '../algorithms/breadthFirstSearch'
 
 function Pathfinder() {
 
@@ -55,7 +55,7 @@ function Pathfinder() {
         }
     }
     const renderBoard = (inputNodes=nodes) => {
-        console.log('rendering board', inputNodes === nodes)
+        // console.log('rendering board', inputNodes === nodes)
         return inputNodes.map((row, rowIdx) => {
             return <div className="nodeRow" id={`${rowIdx}`} key={`${rowIdx}`}>{row.map((col, colIdx) => {
                 return <div onMouseDown={() => drawWall(rowIdx, colIdx)} onMouseOver={(() => drawWallDrag(rowIdx, colIdx))} onMouseUp={() => stopWallDraw()}
@@ -137,6 +137,14 @@ function Pathfinder() {
         animateNodes(visitedNodes, shortestPathNodes)
     }
 
+    const showBFS = () => {
+        console.log("BFS HERE")
+        const startNode = nodes[start.row][start.col]
+        const targetNode = nodes[target.row][target.col]
+        const visitedNodes = breadthFirstSearch(nodes, startNode, targetNode)
+        const shortedPathNodes = findShortestPathNodes(targetNode)
+        animateNodes(visitedNodes, shortedPathNodes)
+    }
     const showDFS = () => {
         console.log('DFS HERE')
         const startNode = nodes[start.row][start.col]
@@ -145,6 +153,7 @@ function Pathfinder() {
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
     }
+
 
     const clearBoard = () => {
         initGrid()
@@ -167,8 +176,9 @@ function Pathfinder() {
         <div className="pathfinder">
             <div className="pathfinder-nav">
                 <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
-                <button className="dijkstra" onClick={showAStar}>A*</button>
-                <button className="dijkstra" onClick={showDFS}>DFS</button>
+                <button className="A*" onClick={showAStar}>A*</button>
+                <button className="BFS" onClick={showBFS}>BFS</button>
+                <button className="DFS" onClick={showDFS}>DFS</button>
                 <button onClick={clearBoard}>Clear</button>
             </div>
             <div className="pathfind-board">

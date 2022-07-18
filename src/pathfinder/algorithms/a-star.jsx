@@ -7,7 +7,7 @@ export const astar = (nodes, start, finish) => {
         node.hDistance = hDist(node, finish)
     })
     sortNodesDist(unvisitedNodes)
-    while (unvisitedNodes.length > 0){
+    while (stack.length > 0){
         sortNodesFScore(unvisitedNodes)
         // console.log(unvisitedNodes)
         const node = unvisitedNodes.shift()

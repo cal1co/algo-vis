@@ -6,8 +6,6 @@ export const depthFirstSearch = (nodes, start, finish) => {
     
     while (stack.length >  0){
         const node = stack.shift()
-        // console.log("STACK:",stack)
-        // console.log("NODE:", node)
         if(node === undefined){
             return visitedNodes
         }
