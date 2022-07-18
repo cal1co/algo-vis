@@ -2,6 +2,8 @@
 
 ## An interactive and educational algorithm visualising tool. 
 
+## [Live Link](https://algo-vis-tool.netlify.app)
+
 ## Pathfinding 
 
 ### Dijkstras
@@ -11,6 +13,10 @@
 ### Breadth First Search (BFS)
 
 ### Depth First Search (DFS)
+
+### Maze Generation:
+
+#### Kruskals
 
 ## Sorting 
 

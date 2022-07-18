@@ -117,6 +117,7 @@ function Pathfinder() {
                     console.log("THIS IS START")
                     nodeHTMLElem.className = `node start`
                 }
+
             }, 10 * i)
         }
     }
