@@ -1,28 +1,30 @@
 import { useState, useEffect } from 'react'
 import '../style/pathfinder.css'
-import { dijkstra, findShortestPathNodes } from '../algorithms/dijkstra'
-import { astar } from '../algorithms/a-star'
-import { depthFirstSearch } from '../algorithms/depthFirstSearch'
-import { breadthFirstSearch } from '../algorithms/breadthFirstSearch'
+
+import { dijkstra, findShortestPathNodes } from '../algorithms/pathfinding/dijkstra'
+import { astar } from '../algorithms/pathfinding/a-star'
+import { depthFirstSearch } from '../algorithms/pathfinding/depthFirstSearch'
+import { breadthFirstSearch } from '../algorithms/pathfinding/breadthFirstSearch'
+import { kruskals } from '../algorithms/maze/kruskals'
 
 function Pathfinder() {
 
     const [nodes, setNodes] = useState(Array)
     const [start, setStart] = useState({
         row:10,
-        col:7
+        col:6
     })
     const [target, setTarget] = useState({
         row:10,
-        col:27
+        col:28
     })
     const [rowLength, setRowLength] = useState(21)
     const [colLength, setColLength] = useState(35)
     const [dragging, setDragging] = useState(false)
 
     useEffect(() => {
-        setStart({row:10, col:7})
-        setTarget({row:10, col:27})
+        setStart({row:10, col:6})
+        setTarget({row:10, col:28})
         initGrid()
     },[setNodes])
 
@@ -68,6 +70,7 @@ function Pathfinder() {
             })}</div>
         })
     }
+
     const drawWall = (row, col) => {
         // console.log("WALL BUILT ON", row, col)
         const node = document.getElementById(`r${row}-c${col}`)
@@ -85,7 +88,6 @@ function Pathfinder() {
             setDragging(true)
         }
     }
-
     const drawWallDrag = (row, col) => {
         if (dragging){
             drawWall(row, col)
@@ -110,7 +112,6 @@ function Pathfinder() {
             }, 10 * i)
         }
     }
-
     const animateShortestPath = (shortestPathNodes) => {
         for (let i = 0; i < shortestPathNodes.length; i++){
             setTimeout(() => {
@@ -120,6 +121,7 @@ function Pathfinder() {
         }
     }
 
+    // Pathfinding
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
         const startNode = nodes[start.row][start.col]
@@ -136,7 +138,6 @@ function Pathfinder() {
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
     }
-
     const showBFS = () => {
         console.log("BFS HERE")
         const startNode = nodes[start.row][start.col]
@@ -154,6 +155,23 @@ function Pathfinder() {
         animateNodes(visitedNodes, shortestPathNodes)
     }
 
+    // Walls
+    const animateWalls = (visitedNodes) => {
+        for (let i = 0; i < visitedNodes.length; i++){
+            setTimeout(() => {
+                const node = visitedNodes[i];
+                // console.log(node.row, node.column)
+                nodes[node.row][node.column].wall = true
+                document.getElementById(`r${node.row}-c${node.column}`).className = `node unvisited wall`
+            }, 10 * i)
+        }
+    }
+    const showKruskals = () => {
+        const startNode = nodes[start.row][start.col]
+        const targetNode = nodes[target.row][target.col]
+        const wallPath = kruskals(nodes, startNode, targetNode)
+        animateWalls(wallPath)
+    }
 
     const clearBoard = () => {
         initGrid()
@@ -180,6 +198,8 @@ function Pathfinder() {
                 <button className="BFS" onClick={showBFS}>BFS</button>
                 <button className="DFS" onClick={showDFS}>DFS</button>
                 <button onClick={clearBoard}>Clear</button>
+                <button className="Kruskals" onClick={showKruskals}>Kruskals</button>
+
             </div>
             <div className="pathfind-board">
                 {renderBoard()}

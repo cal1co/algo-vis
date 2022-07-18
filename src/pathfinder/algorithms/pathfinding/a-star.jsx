@@ -2,12 +2,12 @@ export const astar = (nodes, start, finish) => {
     const visitedNodes = []
     start.distance = 0
     const unvisitedNodes = fetchNodes(nodes)
-    
+    console.log("in A*", unvisitedNodes)
     unvisitedNodes.forEach(node => {
         node.hDistance = hDist(node, finish)
     })
     sortNodesDist(unvisitedNodes)
-    while (stack.length > 0){
+    while (unvisitedNodes.length > 0){
         sortNodesFScore(unvisitedNodes)
         // console.log(unvisitedNodes)
         const node = unvisitedNodes.shift()
