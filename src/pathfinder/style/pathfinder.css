@@ -17,6 +17,39 @@
     height:10vh;
     color:white;
     font-weight:bold;
+    display:flex;
+    gap:2em;
+}
+.pathfind-dropdown{
+    width:fit-content;
+}
+.pathfind-btn{
+    background:none;
+    border:none;
+    color:white;
+    text-decoration:none;
+}
+.pathfind-btn:hover{
+    color:rgba(255, 255, 255, 0.86);
+    cursor:pointer;
+}
+.pathfind-content{
+    position:absolute;
+}
+.pathfind-content > div{
+    float:none;
+    display:block;
+    text-align:left;
+    padding:0.75em;
+    width:7em;
+    background:var(--primary);
+    border-bottom:0.5px solid white;
+}
+.pathfind-content > div:hover{
+    cursor:pointer;
+    filter:brightness(0.95);
+    color:rgba(255, 255, 255, 0.86);
+
 }
 
 .pathfind-board{
@@ -94,14 +127,16 @@
 }
 
 .algo-stats{
-    max-height:3em;
+    height:1.5em;
     width:70vw;
     font-weight:500;
     font-size:1.45vw;
     gap:0.25em;
     word-spacing:0.07em
 }
+.step-stat, .algo-stats > p{
+    margin:0;
+}
 .step-stat{
     font-weight:bold;
-    margin:0;
 }

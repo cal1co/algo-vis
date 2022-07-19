@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../style/pathfinder.css'
 
+
 import { dijkstra, findShortestPathNodes } from '../algorithms/pathfinding/dijkstra'
 import { astar } from '../algorithms/pathfinding/a-star'
 import { depthFirstSearch } from '../algorithms/pathfinding/depthFirstSearch'
@@ -27,6 +28,8 @@ function Pathfinder() {
     const [stepLength, setStepLength] = useState(0)
     const [pathLength, setPathLength] = useState(0)
     const [algoName, setAlgoName] = useState('')
+    const [showPathfind, setShowPathfind] = useState(0)
+    const [showWallDrop, setShowWallDrop] = useState(0)
 
     useEffect(() => {
         setStart({row:10, col:6})
@@ -246,18 +249,30 @@ function Pathfinder() {
     return (
         <div className="pathfinder">
             <div className="pathfinder-nav">
-                <button className="dijkstra" onClick={showDijkstras}>Dijkstras</button>
-                <button className="A*" onClick={showAStar}>A*</button>
-                <button className="BFS" onClick={showBFS}>BFS</button>
-                <button className="DFS" onClick={showDFS}>DFS</button>
-                <button onClick={clearBoard}>Clear</button>
-                <button onClick={clearSolution}>Clear Solution</button>
-                <button className="Kruskals" onClick={showKruskals}>Kruskals</button>
-                <button className="Random" onClick={showRandom}>Random</button>
+                <div className="pathfind-dropdown">
+                    <div className="pathfind-btn" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Pathfinding Algorithms &#8681;</div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
+                    <div className="pathfind-content" style={{display: showPathfind ? 'contents' : 'none'}}>
+                        <div className="dijkstra" onClick={showDijkstras}>Dijkstras</div>
+                        <div className="A*" onClick={showAStar}>A*</div>
+                        <div className="BFS" onClick={showBFS}>BFS</div>
+                        <div className="DFS" onClick={showDFS}>DFS</div>
+                    </div>
+                </div>
+                <div className="pathfind-dropbow">
+                    <div className="pathfind-btn" onClick={() => setShowWallDrop((showWallDrop * -1) + 1)}>
+                        Wall Generation &#8681;
+                    </div> 
+                    <div className="pathfind-content" style={{display: showWallDrop ? 'contents' : 'none'}}>
+                        <div className="Kruskals" onClick={showKruskals}>Kruskals</div>
+                        <div className="Random" onClick={showRandom}>Random</div>
+                    </div>
 
+                </div>
+                <div className="pathfind-btn" onClick={clearBoard}>Clear</div>
+                <div className="pathfind-btn" onClick={clearSolution}>Clear Solution</div>
             </div>
             <div className="pathfind-board">
-                <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'contents'}}>Select an algorithm</div>
+                <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'flex'}}><p>Select and algorithm</p></div>
                 <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}> {algoName} searched <p className="step-stat">{stepLength}</p> nodes and drew a shortest path with length <p className="step-stat">{pathLength}</p></div>
                 {renderBoard()}
             </div>
