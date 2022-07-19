@@ -20,6 +20,14 @@
     display:flex;
     gap:2em;
 }
+.pathfinder-nav > div {
+    display:flex;
+    margin-left:2em;
+    position:relative;
+    height:fit-content;
+    top:50%;
+    transform:translateY(-50%)
+}
 .pathfind-dropdown{
     width:fit-content;
 }

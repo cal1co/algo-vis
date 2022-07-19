@@ -212,6 +212,7 @@ function Pathfinder() {
 
     const clearBoard = () => {
         initGrid()
+        setShowStats(false)
         for (let row = 0; row < rowLength; row++){
             for (let column = 0; column < colLength; column++){
                 if (row === start.row && column == start.col){
