@@ -13,6 +13,9 @@ function App() {
   return (
     <div className="App">
       <div className="pathfinder" style={{display: pathfinder ? 'contents' : 'none'}}>
+        <div className="vis-title">
+          <p>Pathfinding Algorithm Visualiser</p> 
+          </div>
         <Pathfinder/>
       </div>
       <div className="sort" style={{display: sort ? 'contents' : 'none'}}>

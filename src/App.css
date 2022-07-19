@@ -1,0 +1,16 @@
+.vis-title{
+    background:#287DEB;
+    color:white;
+    height:3em;
+    font-weight:900;
+    position:relative;
+    z-index:1
+}
+.vis-title > p {
+    font-size:1.7em;
+    position:relative;
+    /* left:10%; */
+    margin:0;
+    top:50%;
+    transform:translateY(-50%)
+}
