@@ -271,7 +271,7 @@ function Pathfinder() {
                 <div className="pathfind-btn" onClick={clearBoard}>Clear</div>
                 <div className="pathfind-btn" onClick={clearSolution}>Clear Solution</div>
             </div>
-            <div className="pathfind-board">
+            <div className="pathfind-board" onMouseLeave={() => setDragging(false)}>
                 <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'flex'}}><p>Select and algorithm</p></div>
                 <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}> {algoName} searched <p className="step-stat">{stepLength}</p> nodes and drew a shortest path with length <p className="step-stat">{pathLength}</p></div>
                 {renderBoard()}
