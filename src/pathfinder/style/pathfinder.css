@@ -20,23 +20,21 @@
     display:flex;
     gap:2em;
 }
-.pathfinder-nav > div {
-    display:flex;
-    margin-left:2em;
-    position:relative;
-    height:fit-content;
-    top:50%;
-    transform:translateY(-50%)
-}
 .pathfind-dropdown{
     width:fit-content;
 }
 .pathfind-btn{
+    text-align:center;
     background:none;
     border:none;
     color:white;
     text-decoration:none;
+    width:8em;
     height:fit-content;
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    height:4vh;
 }
 .pathfind-btn:hover{
     color:rgba(255, 255, 255, 0.86);
@@ -50,7 +48,7 @@
     display:block;
     text-align:left;
     padding:0.75em;
-    width:7em;
+    width:6.5em;
     background:var(--primary);
     border-bottom:0.5px solid white;
     position:relative;

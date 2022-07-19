@@ -256,7 +256,7 @@ function Pathfinder() {
         <div className="pathfinder">
             <div className="pathfinder-nav">
                 <div className="pathfind-dropdown">
-                    <div className="pathfind-btn" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Pathfinding Algorithms &#8681;</div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
+                    <div className="pathfind-btn" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Algorithms</div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
                     <div className="pathfind-content" style={{display: showPathfind ? 'contents' : 'none'}}>
                         <div className="dijkstra" onClick={showDijkstras}>Dijkstras</div>
                         <div className="A*" onClick={showAStar}>A*</div>
@@ -266,7 +266,7 @@ function Pathfinder() {
                 </div>
                 <div className="pathfind-dropbown">
                     <div className="pathfind-btn" onClick={() => setShowWallDrop((showWallDrop * -1) + 1)}>
-                        Wall Generation &#8681;
+                        Wall Generation
                     </div> 
                     <div className="pathfind-content" style={{display: showWallDrop ? 'contents' : 'none'}}>
                         <div className="Kruskals" onClick={showKruskals}>Kruskals</div>
