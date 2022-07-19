@@ -61,24 +61,22 @@
 }
 
 @keyframes colour_switch{
-    0% { background-color: var(--follow); border-radius:50%; transform:rotate(90deg)}
-    20% { background-color: var(--from); border-radius:50%; transform:rotate(90deg)}
+    0%   { background-color: var(--follow); border-radius:50%; transform:rotate(90deg)}
+    20%  { background-color: var(--from); border-radius:50%; transform:rotate(90deg)}
     100% { background-color:var(--to); border-radius:1%; transform:rotate(0);};
 }
 
 .short-path{
     animation-name:short_colour_switch;
-    animation-duration:0.35s;
+    animation-duration:0.1s;
     animation-timing-function: ease-in-out;
     background-color:var(--follow);
     border:0.5px solid var(--follow)
 }
 
 @keyframes short_colour_switch{
-    /* from { background-color: var(--from) } */
-    /* from { background-color: white} */
-    from { background-color: var(--follow) }
-    to { background-color: var(--follow); border:0.5px solid var(--follow)}
+    from { background-color: var(--follow)}
+    to   { background-color: var(--follow)}
 }
 
 .wall{
@@ -93,4 +91,15 @@
     5%{ background-color: var(--follow); border-radius:50%}
     20%{ background-color: var(--from)}
     100%{ background-color: var(--test)}
+}
+
+.algo-stats{
+    height:3em;
+    width:80vw;
+    font-weight:500;
+    font-size:1.75vw;
+    gap:0.3em
+}
+.step-stat{
+    font-weight:bold
 }

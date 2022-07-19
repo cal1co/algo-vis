@@ -23,6 +23,10 @@ function Pathfinder() {
     const [rowLength, setRowLength] = useState(21)
     const [colLength, setColLength] = useState(35)
     const [dragging, setDragging] = useState(false)
+    const [showStats, setShowStats] = useState(false)
+    const [stepLength, setStepLength] = useState(0)
+    const [pathLength, setPathLength] = useState(0)
+    const [algoName, setAlgoName] = useState('')
 
     useEffect(() => {
         setStart({row:10, col:6})
@@ -100,10 +104,12 @@ function Pathfinder() {
     }
 
     const animateNodes = (visitedNodes, shortestPathNodes) => {
+        setStepLength(0)
+        setPathLength(0)
         for (let i = 0; i <= visitedNodes.length; i++){
             if (i === visitedNodes.length){
                 setTimeout(() => {
-                    animateShortestPath(shortestPathNodes)
+                    animateShortestPath(shortestPathNodes, visitedNodes)
                 }, 10 * i)
                 return 
             }
@@ -113,19 +119,22 @@ function Pathfinder() {
                 const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
                 nodeHTMLElem.className = `node visited`
                 if (node.startNode){
-                    console.log(node)
-                    console.log("THIS IS START")
                     nodeHTMLElem.className = `node start`
                 }
+                setStepLength(i)
 
             }, 10 * i)
         }
     }
-    const animateShortestPath = (shortestPathNodes) => {
+    const animateShortestPath = (shortestPathNodes, visitedNodes) => {
         for (let i = 0; i < shortestPathNodes.length; i++){
             setTimeout(() => {
                 const node = shortestPathNodes[i]
                 document.getElementById(`r${node.row}-c${node.column}`).className = `node short-path`
+                setPathLength(i)
+                if (i === shortestPathNodes.length - 1){
+                    console.log("SEARCHED NODES: ", visitedNodes.length, "PATH LENGTH: ", shortestPathNodes.length)
+                }
             }, 30 * i)
         }
     }
@@ -133,6 +142,8 @@ function Pathfinder() {
     // Pathfinding
     const showDijkstras = () => {
         console.log("DIJKSTRAS HERE")
+        setShowStats(true)
+        setAlgoName("Dijkstra's Algorithm")
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = dijkstra(nodes, startNode, targetNode)
@@ -141,6 +152,8 @@ function Pathfinder() {
     }
     const showAStar = () => {
         console.log("A* HERE")
+        setShowStats(true)
+        setAlgoName("A*")
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = astar(nodes, startNode, targetNode)
@@ -150,6 +163,8 @@ function Pathfinder() {
     }
     const showBFS = () => {
         console.log("BFS HERE")
+        setShowStats(true)
+        setAlgoName("Breadth First Search (BFS)")
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = breadthFirstSearch(nodes, startNode, targetNode)
@@ -158,6 +173,8 @@ function Pathfinder() {
     }
     const showDFS = () => {
         console.log('DFS HERE')
+        setShowStats(true)
+        setAlgoName("Depth First Search (DFS)")
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = depthFirstSearch(nodes, startNode, targetNode)
@@ -239,6 +256,9 @@ function Pathfinder() {
 
             </div>
             <div className="pathfind-board">
+                <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'contents'}}>Select an algorithm</div>
+                <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}><p>{algoName} searched</p> <p className="step-stat">{stepLength}</p> <p>
+                    nodes and drew a shortest path with length</p> <p className="step-stat">{pathLength}</p></div>
                 {renderBoard()}
             </div>
         </div>
