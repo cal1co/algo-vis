@@ -14,7 +14,7 @@
     box-shadow: #0000003d 0 5px 10px;
     width:100vw;
     overflow:none;
-    height:10vh;
+    height:8vh;
     color:white;
     font-weight:bold;
     display:flex;
@@ -59,7 +59,7 @@
     position:relative;
     display:grid;
     justify-content:center;
-    top:25%;
+    top:22.5%;
     transform:translateY(-25%);
 }
 .nodeRow{
