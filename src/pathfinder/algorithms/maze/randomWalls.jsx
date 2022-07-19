@@ -1,5 +1,4 @@
 export const randomWalls = (nodes) => {
-    
     const unvisitedNodes = fetchNodes(nodes)
     durstenfeldShuffle(unvisitedNodes)
     const randomNodes = []

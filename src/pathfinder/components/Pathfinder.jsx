@@ -8,6 +8,7 @@ import { depthFirstSearch } from '../algorithms/pathfinding/depthFirstSearch'
 import { breadthFirstSearch } from '../algorithms/pathfinding/breadthFirstSearch'
 
 import { kruskals } from '../algorithms/maze/kruskals'
+import { randomVerticalDivision } from '../algorithms/maze/randomVerticalDivision'
 import { randomWalls } from '../algorithms/maze/randomWalls'
 
 function Pathfinder() {
@@ -200,6 +201,10 @@ function Pathfinder() {
         const wallPath = kruskals(nodes)
         animateWalls(wallPath)
     }
+    const showRandomVerticalDivision = () => {
+        const randomPath = randomVerticalDivision(nodes)
+        animateWalls(randomPath)
+    }
     const showRandom = () => {
         const randomPath = randomWalls(nodes)
         animateWalls(randomPath)
@@ -258,12 +263,13 @@ function Pathfinder() {
                         <div className="DFS" onClick={showDFS}>DFS</div>
                     </div>
                 </div>
-                <div className="pathfind-dropbow">
+                <div className="pathfind-dropbown">
                     <div className="pathfind-btn" onClick={() => setShowWallDrop((showWallDrop * -1) + 1)}>
                         Wall Generation &#8681;
                     </div> 
                     <div className="pathfind-content" style={{display: showWallDrop ? 'contents' : 'none'}}>
                         <div className="Kruskals" onClick={showKruskals}>Kruskals</div>
+                        <div className="RandomVerticalDivision" onClick={showRandomVerticalDivision}>Random Vertical Division</div>
                         <div className="Random" onClick={showRandom}>Random</div>
                     </div>
 
