@@ -28,6 +28,7 @@
     border:none;
     color:white;
     text-decoration:none;
+    height:fit-content;
 }
 .pathfind-btn:hover{
     color:rgba(255, 255, 255, 0.86);
@@ -44,6 +45,8 @@
     width:7em;
     background:var(--primary);
     border-bottom:0.5px solid white;
+    position:relative;
+    z-index:1
 }
 .pathfind-content > div:hover{
     cursor:pointer;
@@ -132,7 +135,7 @@
     font-weight:500;
     font-size:1.45vw;
     gap:0.25em;
-    word-spacing:0.07em
+    word-spacing:0.07em;
 }
 .step-stat, .algo-stats > p{
     margin:0;
