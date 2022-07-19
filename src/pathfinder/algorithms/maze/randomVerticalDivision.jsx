@@ -11,8 +11,7 @@ export const randomVerticalDivision = (nodes) => {
     sortWallsCol(cutWalls)
     const wallGaps = []
     for (let i = 0; i < (cutWalls.length / nodes.length); i++ ){
-        const num = Math.floor(Math.random() * nodes.length - 1)
-        console.log(num)
+        const num = Math.floor(Math.random() * (nodes.length - 1)) + 1
         const idx = (num + (i * nodes.length) - 1)
         wallGaps.push(cutWalls[idx])
     }
@@ -20,17 +19,8 @@ export const randomVerticalDivision = (nodes) => {
         const idx = cutWalls.indexOf(gap)
         cutWalls.splice(idx, 1)
     })
-    // cutWalls.splice((num + (i * cutWalls.length / nodes.length)), 1)
-
-    // for (let i = 0; i < cutWalls.length; i + curWalls.)
-    console.log(cutWalls.length)
-    console.log(cutWalls.length / nodes.length)
-    console.log(nodes.length)
     return cutWalls
-    // console.log(unvisitedNodes)
 }
-// i + 27 > (i+1) * 27
-// 
 const fetchNodes = (grid) => {
     const nodes = []
     for (const row of grid){
