@@ -219,6 +219,7 @@ function Pathfinder() {
         }
     }
     const clearSolution = () => {
+        setShowStats(false)
         nodes.forEach((nodeRow) => {
             nodeRow.forEach((node) => {
                 node.visited = false
@@ -257,8 +258,7 @@ function Pathfinder() {
             </div>
             <div className="pathfind-board">
                 <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'contents'}}>Select an algorithm</div>
-                <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}><p>{algoName} searched</p> <p className="step-stat">{stepLength}</p> <p>
-                    nodes and drew a shortest path with length</p> <p className="step-stat">{pathLength}</p></div>
+                <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}> {algoName} searched <p className="step-stat">{stepLength}</p> nodes and drew a shortest path with length <p className="step-stat">{pathLength}</p></div>
                 {renderBoard()}
             </div>
         </div>
