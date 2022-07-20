@@ -42,7 +42,7 @@ function Sort() {
             inputArr[j] = temp;
         }
     }
-
+    const time = 2
     const visualiseBubble = (arrHistory) => {
         for (let i = 0; i <= arrHistory.length; i++){
             if (i === arrHistory.length){
@@ -53,9 +53,9 @@ function Sort() {
                         setTimeout(() => {
                             item.classList.add("sort-visited")
                         }, 5 * i)
-                        // item.classList.remove("sort-visited")
+                        item.classList.remove("sort-visited")
                     }
-                }, 1 * i)
+                }, time * i)
                 return 
             }
             const index1 = arrHistory[i][0]
@@ -71,10 +71,56 @@ function Sort() {
                     itemOne.style.backgroundColor = 'black'
                     itemTwo.style.backgroundColor = 'black'
                 }, 1)
-            }, 1 * i)
+            }, time * i)
             
             itemOne.id = `sort-${index2}`
             itemTwo.id = `sort-${index1}`
+        }
+    }
+    const visualiseSelection = (arrHistory) => {
+        for (let i = 0; i <= arrHistory.length; i++){
+            // console.log(arrHistory[i])
+            if (i === arrHistory.length){
+                console.log("END")
+                setTimeout(() => {
+                    for (let i = 0; i < 100; i++){
+                        const item = document.getElementById(`sort-${i + 1}`)
+                        setTimeout(() => {
+                            item.classList.add("sort-visited")
+                        }, 5 * i)
+                        item.classList.remove("sort-visited")
+                    }
+                }, time * i)
+                return 
+            }
+            const index1 = arrHistory[i][0]
+            const index2 = arrHistory[i][1]
+            const itemOne = document.getElementById(`sort-${index1}`)
+            const itemTwo = document.getElementById(`sort-${index2}`)
+            if (arrHistory[i].length === 2){
+                setTimeout(() => {
+                    itemOne.style.backgroundColor = 'red'
+                    itemTwo.style.backgroundColor = 'red'
+                    setTimeout(() => {
+                        itemOne.style.backgroundColor = 'black'
+                        itemTwo.style.backgroundColor = 'black'   
+                    }, 5)
+                }, time * i)
+            }
+            if (arrHistory[i].length === 3){
+                setTimeout(() => {
+                    itemOne.style.height = `${index2}%`
+                    itemTwo.style.height = `${index1}%`
+                    itemOne.style.backgroundColor = 'red'
+                    itemTwo.style.backgroundColor = 'red'
+                    setTimeout(() => {
+                        itemOne.style.backgroundColor = 'black'
+                        itemTwo.style.backgroundColor = 'black'
+                    }, 1)
+                }, time * i)
+                itemOne.id = `sort-${index2}`
+                itemTwo.id = `sort-${index1}`
+            }
         }
     }
 
@@ -86,6 +132,7 @@ function Sort() {
     const showSelectionSort = () => {
         const sortedArr = selection(arr)
         console.log(sortedArr)
+        visualiseSelection(sortedArr)
     }
     const showInsertionSort = () => {
         const sortedArr = insertion(arr)

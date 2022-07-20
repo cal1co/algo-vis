@@ -3,6 +3,8 @@ import './App.css'
 
 import Pathfinder from './pathfinder/components/Pathfinder'
 import Sort from './sort/components/Sort'
+import { HashRouter as Router, Link } from 'react-router-dom'
+import Routers from './routes'
 
 function App() {
   const [pathfinder, setPathfinder] = useState(true)
@@ -21,23 +23,14 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={switchToPathfinder}>Pathfind</button>
-      <button onClick={switchToSort}>Sort</button>
-      <div className="pathfinder" style={{display: pathfinder ? 'contents' : 'none'}}>
+      <Router>
+        <Link to='/'>Pathfind</Link>
+        <Link to='/sort'>Sort</Link>
         <div className="vis-title">
-          <p>Algo-Vis: Pathfinding Algorithm Visualiser</p> 
-          </div>
-        <Pathfinder/>
-      </div>
-      <div className="sort" style={{display: sort ? 'contents' : 'none'}}>
-        <div className="vis-title">
-            <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
-            </div>
-          <Sort/>
+          <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
         </div>
-      <div className="game" style={{display: game ? 'contents' : 'none'}}>
-        game
-      </div>
+        <Routers/>
+      </Router>
     </div>
   )
 }
