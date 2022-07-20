@@ -9,3 +9,21 @@
     display:flex;
     gap:2em;
 }
+
+.sort-board{
+    border:1px solid red;
+    height:50vh;
+    width:80vw;
+    position:relative;
+    left:50%;
+    margin-top:8vh;
+    /* top:50%; */
+    transform:translateX(-50%);
+    background-color:black;
+}
+
+.sort-item{
+    display:inline-flex;
+    outline:0.5px solid white;
+    background:rgb(50, 50, 50);
+}

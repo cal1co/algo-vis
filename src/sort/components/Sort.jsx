@@ -8,14 +8,30 @@ import { quick } from '../algorithms/quick'
 import { radix } from '../algorithms/radix'
 
 function Sort() {
-
     const [arr, setArr] = useState([])
-
     useEffect(() => {
-        const randArr = Array(100).fill().map((e, idx) => idx + 1)
+        const randArr = generateArr(100)
         setArr(randArr)
     }, [setArr])
 
+
+    const generateArr = (arrLength) => {
+        return Array(arrLength).fill().map((e, idx) => idx + 1)
+    }
+    const renderBoard = (board=arr) => {
+        return board.map((length) => {
+            return <div className="sort-item" id={`sort-${length}`} style={{width: "1%", height:`${length}%`}}></div>
+        })
+    }
+
+    const shuffleBoard = (board=arr) => {
+        durstenfeldShuffle(board)
+        console.log(board)
+        board.forEach((item, idx) => {
+            const sortItem = document.getElementById(`sort-${item}`)
+            sortItem.style.height = `${idx + 1}%`
+        })
+    }
     const durstenfeldShuffle = (inputArr) => {
         for (let i = inputArr.length -1; i > 0; i--){
             let j = Math.floor(Math.random() * (i + 1))
@@ -61,6 +77,15 @@ function Sort() {
                 <button onClick={showMergeSort}>Merge Sort</button>
                 <button onClick={showQuickSort}>Quick Sort</button>
                 <button onClick={showRadixSort}>Radix Sort</button>
+            </div>
+
+            <div className="sort-board">
+                {renderBoard()}
+
+            </div>
+
+            <div className="shuffle-butt">
+                <button className="shuffle-board" onClick={() => shuffleBoard(arr)}>Shuffle Board</button>
             </div>
         </div>
     )
