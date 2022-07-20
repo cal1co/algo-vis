@@ -1,7 +1,7 @@
 export const selection = (arr) => {
 
     const arrHistory = []
-    console.log("UNSORTED (SELECTION): ", arr)
+    // console.log("UNSORTED (SELECTION): ", arr)
     const n = arr.length
     for (let i = 0; i < n; i++){
         let minVal = i
@@ -18,6 +18,6 @@ export const selection = (arr) => {
             arr[minVal] = temp
         }
     }
-    console.log("SORTED (SELECTION): ", arr)
+    // console.log("SORTED (SELECTION): ", arr)
     return arrHistory
 }

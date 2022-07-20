@@ -43,18 +43,35 @@ function Sort() {
         }
     }
     const time = 2
+    const finisherAnimation = (arr, i) => {
+        for (let i = 0; i < 100; i++){
+            const item = document.getElementById(`sort-${i + 1}`)
+            setTimeout(() => {
+                item.classList.add("sort-visited")
+            }, 5 * i)
+            item.classList.remove("sort-visited")
+        }
+    }
+    const animate = (itemOne, itemTwo, swap, index1, index2, i) => {
+        setTimeout(() => {
+            if (swap){
+                itemOne.style.height = `${index2}%`
+                itemTwo.style.height = `${index1}%`
+            }
+            itemOne.style.backgroundColor = 'red'
+            itemTwo.style.backgroundColor = 'red'
+            setTimeout(() => {
+                itemOne.style.backgroundColor = 'black'
+                itemTwo.style.backgroundColor = 'black'   
+            }, 5)
+        }, time * i)
+    }
     const visualiseBubble = (arrHistory) => {
         for (let i = 0; i <= arrHistory.length; i++){
             if (i === arrHistory.length){
                 console.log("END")
                 setTimeout(() => {
-                    for (let i = 0; i < 100; i++){
-                        const item = document.getElementById(`sort-${i + 1}`)
-                        setTimeout(() => {
-                            item.classList.add("sort-visited")
-                        }, 5 * i)
-                        item.classList.remove("sort-visited")
-                    }
+                    finisherAnimation()
                 }, time * i)
                 return 
             }
@@ -83,13 +100,7 @@ function Sort() {
             if (i === arrHistory.length){
                 console.log("END")
                 setTimeout(() => {
-                    for (let i = 0; i < 100; i++){
-                        const item = document.getElementById(`sort-${i + 1}`)
-                        setTimeout(() => {
-                            item.classList.add("sort-visited")
-                        }, 5 * i)
-                        item.classList.remove("sort-visited")
-                    }
+                    finisherAnimation()
                 }, time * i)
                 return 
             }
@@ -97,30 +108,33 @@ function Sort() {
             const index2 = arrHistory[i][1]
             const itemOne = document.getElementById(`sort-${index1}`)
             const itemTwo = document.getElementById(`sort-${index2}`)
+            
             if (arrHistory[i].length === 2){
-                setTimeout(() => {
-                    itemOne.style.backgroundColor = 'red'
-                    itemTwo.style.backgroundColor = 'red'
-                    setTimeout(() => {
-                        itemOne.style.backgroundColor = 'black'
-                        itemTwo.style.backgroundColor = 'black'   
-                    }, 5)
-                }, time * i)
+                animate(itemOne, itemTwo, false, index1, index2, i)
             }
             if (arrHistory[i].length === 3){
-                setTimeout(() => {
-                    itemOne.style.height = `${index2}%`
-                    itemTwo.style.height = `${index1}%`
-                    itemOne.style.backgroundColor = 'red'
-                    itemTwo.style.backgroundColor = 'red'
-                    setTimeout(() => {
-                        itemOne.style.backgroundColor = 'black'
-                        itemTwo.style.backgroundColor = 'black'
-                    }, 1)
-                }, time * i)
+                animate(itemOne, itemTwo, true, index1, index2, i)
                 itemOne.id = `sort-${index2}`
                 itemTwo.id = `sort-${index1}`
             }
+        }
+    }
+    const visualiseInsertion = (arrHistory) => {
+        for (let i = 0; i <= arrHistory.length; i++){
+            if (i === arrHistory.length){
+                console.log("END")
+                setTimeout(() => {
+                    finisherAnimation()
+                }, time * i)
+                return
+            }
+            const index1 = arrHistory[i][0]
+            const index2 = arrHistory[i][1]
+            const itemOne = document.getElementById(`sort-${index1}`)
+            const itemTwo = document.getElementById(`sort-${index2}`)
+            animate(itemOne, itemTwo, true, index1, index2, i)
+            itemOne.id = `sort-${index2}`
+            itemTwo.id = `sort-${index1}`
         }
     }
 
@@ -137,6 +151,7 @@ function Sort() {
     const showInsertionSort = () => {
         const sortedArr = insertion(arr)
         console.log(sortedArr)
+        visualiseInsertion(sortedArr)
     }
     const showMergeSort = () => {
         const sortedArr = merge(arr)
