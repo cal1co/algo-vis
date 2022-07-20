@@ -1,3 +1,9 @@
+:root{
+    --from:#e61c27;
+    --to:#2ea3d4;
+    --follow:#f5b511;
+}
+
 .sort-nav{
     background-color: #287DEB;
     box-shadow: #0000003d 0 5px 10px;
@@ -24,6 +30,20 @@
 
 .sort-item{
     display:inline-flex;
+    margin-left:0.2%;
     outline:0.5px solid white;
     background:rgb(50, 50, 50);
+}
+
+.sort-visited{
+    animation-name:colour_switch;
+    animation-duration:0.75s;
+    animation-timing-function: ease-in-out;
+    background-color:var(--follow)
+}
+
+@keyframes colour_switch{
+    0%   { background-color: var(--follow); border-radius:50%;}
+    20%  { background-color: var(--from); border-radius:50%;}
+    100% { background-color:var(--to); border-radius:1%; transform:rotate(0);};
 }

@@ -119,16 +119,16 @@ function Pathfinder() {
                 }, 10 * i)
                 return 
             }
-                setTimeout(() => {
-                    const node = visitedNodes[i];
-                    const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
-                    nodeHTMLElem.className = `node visited`
-                    if (node.startNode){
-                        nodeHTMLElem.className = `node start`
-                    }
-                    setStepLength(i)
+            setTimeout(() => {
+                const node = visitedNodes[i];
+                const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
+                nodeHTMLElem.className = `node visited`
+                if (node.startNode){
+                    nodeHTMLElem.className = `node start`
+                }
+                setStepLength(i)
 
-                }, 10 * i)
+            }, 10 * i)
         }
     }
     const animateShortestPath = (shortestPathNodes, visitedNodes) => {

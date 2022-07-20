@@ -103,8 +103,8 @@
 }
 
 @keyframes colour_switch{
-    0%   { background-color: var(--follow); border-radius:50%; transform:rotate(90deg)}
-    20%  { background-color: var(--from); border-radius:50%; transform:rotate(90deg)}
+    0%   { background-color: var(--follow); border-radius:50%; transform:rotate(30deg)}
+    20%  { background-color: var(--from); border-radius:50%; transform:rotate(30deg)}
     100% { background-color:var(--to); border-radius:1%; transform:rotate(0);};
 }
 
