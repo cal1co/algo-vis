@@ -1,26 +1,40 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import Pathfinder from './pathfinder/components/Pathfinder'
 
-// Colour reference: https://huemint.com/brand-intersection/#palette=e61c27-2ea3d4-f9fafa-f5b511
-// #e61c27 + #2ea3d4 + #f5b511 + #287DEB
+import Pathfinder from './pathfinder/components/Pathfinder'
+import Sort from './sort/components/Sort'
 
 function App() {
   const [pathfinder, setPathfinder] = useState(true)
   const [sort, setSort] = useState(false)
   const [game, setGame] = useState(false)
 
+  const switchToPathfinder = () => {
+    setPathfinder(true)
+    setSort(false)
+  }
+
+  const switchToSort = () => {
+    setSort(true)
+    setPathfinder(false)
+  }
+
   return (
     <div className="App">
+      <button onClick={switchToPathfinder}>Pathfind</button>
+      <button onClick={switchToSort}>Sort</button>
       <div className="pathfinder" style={{display: pathfinder ? 'contents' : 'none'}}>
         <div className="vis-title">
-          <p>Pathfinding Algorithm Visualiser</p> 
+          <p>Algo-Vis: Pathfinding Algorithm Visualiser</p> 
           </div>
         <Pathfinder/>
       </div>
       <div className="sort" style={{display: sort ? 'contents' : 'none'}}>
-        sort
-      </div>
+        <div className="vis-title">
+            <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
+            </div>
+          <Sort/>
+        </div>
       <div className="game" style={{display: game ? 'contents' : 'none'}}>
         game
       </div>

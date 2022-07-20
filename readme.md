@@ -20,15 +20,22 @@
 
 ## Sorting 
 
-### Bubble sort 
+### Bubble Sort 
 
-### Quick Sort 
+### Selection Sort
 
 ### Insertion Sort
 
-### Heapsort 
-
 ### Merge Sort
+
+### Quick Sort
+
+### Heap Sort
+
+### Radix Sort
+
+### Bogo Sort
+
 
 ## Game Theory 
 

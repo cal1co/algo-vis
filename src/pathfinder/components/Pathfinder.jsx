@@ -31,6 +31,8 @@ function Pathfinder() {
     const [algoName, setAlgoName] = useState('')
     const [showPathfind, setShowPathfind] = useState(0)
     const [showWallDrop, setShowWallDrop] = useState(0)
+    const [clearing, setClearing] = useState(false)
+    const [animate, setAnimate] = useState(false)
 
     useEffect(() => {
         setStart({row:10, col:6})
@@ -117,17 +119,16 @@ function Pathfinder() {
                 }, 10 * i)
                 return 
             }
-            setTimeout(() => {
-                const node = visitedNodes[i];
-                // console.log(node.row, node.column)
-                const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
-                nodeHTMLElem.className = `node visited`
-                if (node.startNode){
-                    nodeHTMLElem.className = `node start`
-                }
-                setStepLength(i)
+                setTimeout(() => {
+                    const node = visitedNodes[i];
+                    const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
+                    nodeHTMLElem.className = `node visited`
+                    if (node.startNode){
+                        nodeHTMLElem.className = `node start`
+                    }
+                    setStepLength(i)
 
-            }, 10 * i)
+                }, 10 * i)
         }
     }
     const animateShortestPath = (shortestPathNodes, visitedNodes) => {
@@ -210,9 +211,11 @@ function Pathfinder() {
         animateWalls(randomPath)
     }
 
+    // Clear
     const clearBoard = () => {
         initGrid()
         setShowStats(false)
+        clearTimeout(animate)
         for (let row = 0; row < rowLength; row++){
             for (let column = 0; column < colLength; column++){
                 if (row === start.row && column == start.col){
