@@ -28,8 +28,7 @@ const partition = (arr, low, high) => {
 
         if (itemFromLeft <= itemFromRight){
             const temp = arr[itemFromLeft]
-            arrHistory.push(temp)
-            arrHistory.push(arr[itemFromRight])
+            arrHistory.push([temp, arr[itemFromRight]])
             arr[itemFromLeft] = arr[itemFromRight]
             arr[itemFromRight] = temp;
             itemFromLeft++;
@@ -37,8 +36,7 @@ const partition = (arr, low, high) => {
         }
     }
     const temp = arr[high]
-    arrHistory.push(temp)
-    arrHistory.push(arr[itemFromLeft])
+    arrHistory.push([temp, arr[itemFromLeft]])
     arr[high] = arr[itemFromLeft]
     arr[itemFromLeft] = temp
 

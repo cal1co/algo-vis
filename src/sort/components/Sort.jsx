@@ -245,6 +245,12 @@ function Sort() {
             }
         }
     }
+    const visualiseQuick = (arrHistory) => {
+
+    }
+    const visualiseRadix = (arrHistory) => {
+        
+    }
 
     const showBubbleSort = () => {
         const sortedArr = bubble(arr)
@@ -282,7 +288,7 @@ function Sort() {
                 <button onClick={showSelectionSort}>Selection Sort</button>
                 <button onClick={showInsertionSort}>Insertion Sort</button>
                 <button onClick={showMergeSort}>Merge Sort</button>
-                <button onClick={showQuickSort}>Quick Sort</button>
+                {/* <button onClick={showQuickSort}>Quick Sort</button> */}
                 <button onClick={showRadixSort}>Radix Sort</button>
             </div>
 

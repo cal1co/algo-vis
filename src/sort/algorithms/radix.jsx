@@ -4,12 +4,17 @@ export const radix = (arr) => {
 
     for (let i = 0; i < maxDigitCount; i++){
         let digitBuckets = Array.from({length: 10}, () => [])
+        // let digitBuckets = Array(10).fill([])
         for (let j = 0; j < arr.length; j++){
             let digit = getDigit(arr[j], i) //
             digitBuckets[digit].push(arr[j])
+            // console.log(...digitBuckets)
         }
-        arr = [].concat(...digitBuckets)
-        console.log(arr)
+
+        // arr = [].concat(...digitBuckets)
+        arr = [...digitBuckets].flat()
+        
+        console.log("arr", arr)
     }
     return arr;
 }
