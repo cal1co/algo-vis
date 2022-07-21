@@ -43,6 +43,7 @@ const partition = (arr, low, high) => {
     arr[itemFromLeft] = temp
 
     console.log(arrHistory)
+
     return itemFromLeft
 }
 
