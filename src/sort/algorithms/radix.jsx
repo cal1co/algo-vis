@@ -1,7 +1,8 @@
+const arrHistory = []
 export const radix = (arr) => {
 
     const maxDigitCount = maxDigits(arr)
-
+    arrHistory.push(arr)
     for (let i = 0; i < maxDigitCount; i++){
         let digitBuckets = Array.from({length: 10}, () => [])
         // let digitBuckets = Array(10).fill([])
@@ -13,10 +14,10 @@ export const radix = (arr) => {
 
         // arr = [].concat(...digitBuckets)
         arr = [...digitBuckets].flat()
-        
-        console.log("arr", arr)
+        arrHistory.push([...arr])
+        // console.log("arr", arr)
     }
-    return arr;
+    return arrHistory
 }
 
 const digitCount = (num) => {

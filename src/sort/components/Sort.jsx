@@ -9,23 +9,35 @@ import { radix } from '../algorithms/radix'
 
 function Sort() {
     const [arr, setArr] = useState([])
-    const [len, setLen] = useState(20)
-    const [time, setTime] = useState(50)
+    const [len, setLen] = useState(100)
+    const [time, setTime] = useState(22)
+    const [sliderVal, setSliderVal] = useState(3)
 
     useEffect(() => {
         const randArr = generateArr(len)
         setArr(randArr)
+        renderBoard(randArr)
     }, [setArr])
-
 
     const generateArr = (arrLength) => {
         return Array(arrLength).fill().map((e, idx) => idx + 1)
     }
-    const renderBoard = (board=arr) => {
-        const width = 80 / len
-        const margin = 20 / len
+    const renderBoard = (board=arr, inputLen=len) => {
+        const div = document.getElementById("board-div")
+        while (div.firstChild){
+            div.removeChild(div.firstChild)
+        }
+        // console.log(div)
+        const width = 80 / inputLen
+        const margin = 20 / inputLen
         return board.map((length) => {
-            return <div className={`sort-item sorted-${length}`} id={`sort-${length}`} key={length} style={{width: `${width}%`, height:`${length / len * 100}%`, marginLeft:`${margin}%`}}></div>
+            const node = document.createElement("div")
+            node.className = `sort-item sorted-${length}`
+            node.id = `sort-${length}`
+            node.style.height = `${length / inputLen * 100}%`
+            node.style.width = `${width}%`
+            node.style.marginLeft = `${margin}%`
+            div.appendChild(node)
         })
     }
 
@@ -34,14 +46,11 @@ function Sort() {
             board = Array(len).fill().map((e, idx) => idx + 1)
         }
         durstenfeldShuffle(board)
-        console.log(board)
         board.forEach((item, idx) => {
             const sortItem = document.getElementsByClassName(`sorted-${idx+1}`)
             sortItem[0].style.height = `${item / len * 100}%`
             sortItem[0].id = `sort-${item}`
             const sortedItem = document.getElementById(`sort-${item}`)
-            // console.log(sortItem, sortedItem)
-            // console.log(sortedItem.classList)
             if (sortedItem.classList.contains("sort-visited")){
                 sortedItem.classList.remove("sort-visited")
             }
@@ -72,11 +81,15 @@ function Sort() {
                 itemTwo.style.height = `${index1 / len * 100}%`
             }
             itemOne.style.backgroundColor = 'red'
+            itemOne.style.outline = '0.5px solid red'
             itemTwo.style.backgroundColor = 'red'
+            itemTwo.style.outline = '0.5px solid red'
             setTimeout(() => {
                 itemOne.style.backgroundColor = 'black'
+                itemOne.style.outline = '0.5px solid white'
                 itemTwo.style.backgroundColor = 'black'   
-            }, 5)
+                itemTwo.style.outline = '0.5px solid white'   
+            }, 3)
         }, time * i)
     }
     const visualiseBubble = (arrHistory) => {
@@ -249,7 +262,38 @@ function Sort() {
 
     }
     const visualiseRadix = (arrHistory) => {
-        
+        for( let i = 0; i < arrHistory.length; i++){
+            let referenceArr = [...arrHistory[i + 1]]
+            console.log("REF", referenceArr)
+            console.log("INPUT", arrHistory[i])
+            for (let j = 0; j < referenceArr.length; j++){
+                if (referenceArr[j] !== arrHistory[i][j]){
+                    const itemOne = document.getElementById(`sort-${referenceArr[j]}`)
+                    const itemTwo = document.getElementById(`sort-${arrHistory[i][j]}`)
+                    animate(itemOne, itemTwo, true, referenceArr[j], arrHistory[i][j], j * (i + 1))
+                    itemOne.id = `sort-${arrHistory[i][j]}`
+                    itemTwo.id = `sort-${referenceArr[j]}`
+                    const value = arrHistory[i][j]
+                    const swapIdx = arrHistory[i].indexOf(referenceArr[j])
+                    // console.log("SWAP IDX", swapIdx, "SWAP VAL", arrHistory[i][swapIdx])
+                    arrHistory[i][j] = referenceArr[j]
+                    arrHistory[i][swapIdx] = value
+                    // console.log("CHANGED VAL", arrHistory[i][swapIdx])
+                } else {
+                    setTimeout(() => {
+                        const item = document.getElementById(`sort-${arrHistory[i][j]}`)
+                        item.style.backgroundColor = 'red'
+                        setTimeout(() => {
+                            item.style.backgroundColor = 'black'
+                        }, 5)
+                    }, (i+1) * j)
+                }
+            }
+            
+            console.log("SWITCHED", arrHistory[i])
+            // referenceArr = arrHistory[i + 1]
+            console.log("REF", referenceArr)
+        }
     }
 
     const showBubbleSort = () => {
@@ -279,6 +323,70 @@ function Sort() {
     const showRadixSort = () => {
         const sortedArr = radix(arr)
         console.log(sortedArr)
+        visualiseRadix(sortedArr)
+    }
+
+  
+
+
+    const handleSlider = (ev) => {
+        // console.log(ev.target.value)
+        const sliderValue = ev.target.value
+        setSliderVal(sliderValue)
+
+        if (sliderValue == 0){
+            setLen(10)
+            const getArr = generateArr(10)
+            setArr(getArr)
+            renderBoard(getArr, 10)
+        }
+        if (sliderValue == 1){
+            setLen(25)
+            const getArr = generateArr(25)
+            setArr(getArr)
+            renderBoard(getArr, 25)
+
+        }
+        if (sliderValue == 2){
+            setLen(50)
+            const getArr = generateArr(50)
+            setArr(getArr)
+            renderBoard(getArr, 50)
+
+        }
+        if (sliderValue == 3){
+            setLen(100)
+            const getArr = generateArr(100)
+            setArr(getArr)
+            renderBoard(getArr, 100)
+
+        }
+        if(sliderValue == 4){
+            setLen(250)
+            const getArr = generateArr(250)
+            setArr(getArr)
+            renderBoard(getArr, 250)
+
+        }
+        if(sliderValue == 5){
+            setLen(500)
+            const getArr = generateArr(500)
+            setArr(getArr)
+            renderBoard(getArr, 500)
+
+        }
+        if(sliderValue == 6){
+            setLen(750)
+            const getArr = generateArr(750)
+            setArr(getArr)
+            renderBoard(getArr, 750)
+
+        }
+    }
+
+    const handleSpeed = (ev) => {
+        const value = ev.target.value
+        setTime(value)
     }
 
     return (
@@ -289,16 +397,27 @@ function Sort() {
                 <button onClick={showInsertionSort}>Insertion Sort</button>
                 <button onClick={showMergeSort}>Merge Sort</button>
                 {/* <button onClick={showQuickSort}>Quick Sort</button> */}
-                <button onClick={showRadixSort}>Radix Sort</button>
+                {/* <button onClick={showRadixSort}>Radix Sort</button> */}
             </div>
 
-            <div className="sort-board">
-                {renderBoard()}
-
+            <div className="sort-board" id="board-div">
+                {/* {renderBoard()} */}
             </div>
 
             <div className="shuffle-butt">
                 <button className="shuffle-board" onClick={() => shuffleBoard(arr)}>Shuffle Board</button>
+            </div>
+            <div className="length-slider">
+                <form action="post">
+                    <label htmlFor="sample-size">sample size</label>
+                    <input id="sample-size" name="sample-size" type="range" min="0" max="6" step="1" value={sliderVal} onChange={handleSlider}/>
+                </form>
+            </div>
+            <div className="time-slider">
+                <form action="post">
+                    <label htmlFor="speed-size">speed</label>
+                    <input id="speed-size" name="speed-size" type="range" min="10" max="200" step="5" value={time} onChange={handleSpeed}/>
+                </form>
             </div>
         </div>
     )

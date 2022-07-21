@@ -17,7 +17,6 @@
 }
 
 .sort-board{
-    border:1px solid red;
     height:50vh;
     width:80vw;
     position:relative;
@@ -26,6 +25,7 @@
     /* top:50%; */
     transform:translateX(-50%);
     background-color:black;
+    /* overflow:hidden; */
 }
 
 .sort-item{
