@@ -33,6 +33,7 @@ function Pathfinder() {
     const [showWallDrop, setShowWallDrop] = useState(0)
     const [clearing, setClearing] = useState(false)
     const [animate, setAnimate] = useState(false)
+    const [timeouts, setTimeouts] = useState([])
 
     useEffect(() => {
         setStart({row:10, col:6})
@@ -114,12 +115,13 @@ function Pathfinder() {
         setPathLength(0)
         for (let i = 0; i <= visitedNodes.length; i++){
             if (i === visitedNodes.length){
-                setTimeout(() => {
+                const pathTimer = setTimeout(() => {
                     animateShortestPath(shortestPathNodes, visitedNodes)
                 }, 10 * i)
+                timeouts.push(pathTimer)
                 return 
             }
-            setTimeout(() => {
+            const nodeAnimate = setTimeout(() => {
                 const node = visitedNodes[i];
                 const nodeHTMLElem = document.getElementById(`r${node.row}-c${node.column}`)
                 nodeHTMLElem.className = `node visited`
@@ -127,13 +129,13 @@ function Pathfinder() {
                     nodeHTMLElem.className = `node start`
                 }
                 setStepLength(i)
-
-            }, 10 * i)
+            }, 10 * i)  
+            timeouts.push(nodeAnimate)
         }
     }
     const animateShortestPath = (shortestPathNodes, visitedNodes) => {
         for (let i = 0; i < shortestPathNodes.length; i++){
-            setTimeout(() => {
+            const pathAnimate = setTimeout(() => {
                 const node = shortestPathNodes[i]
                 document.getElementById(`r${node.row}-c${node.column}`).className = `node short-path`
                 setPathLength(i)
@@ -141,6 +143,7 @@ function Pathfinder() {
                     console.log("SEARCHED NODES: ", visitedNodes.length, "PATH LENGTH: ", shortestPathNodes.length)
                 }
             }, 30 * i)
+            timeouts.push(pathAnimate)
         }
     }
 
@@ -213,6 +216,9 @@ function Pathfinder() {
 
     // Clear
     const clearBoard = () => {
+        while (timeouts.length){
+            window.clearTimeout(timeouts.shift())
+        }
         initGrid()
         setShowStats(false)
         clearTimeout(animate)
@@ -231,6 +237,9 @@ function Pathfinder() {
         }
     }
     const clearSolution = () => {
+        while (timeouts.length){
+            window.clearTimeout(timeouts.shift())
+        }
         setShowStats(false)
         nodes.forEach((nodeRow) => {
             nodeRow.forEach((node) => {
