@@ -9,8 +9,8 @@ import { radix } from '../algorithms/radix'
 
 function Sort() {
     const [arr, setArr] = useState([])
-    const [len, setLen] = useState(400)
-    const [time, setTime] = useState(100)
+    const [len, setLen] = useState(20)
+    const [time, setTime] = useState(50)
 
     useEffect(() => {
         const randArr = generateArr(len)
@@ -30,12 +30,21 @@ function Sort() {
     }
 
     const shuffleBoard = (board=arr) => {
+        if (board.length === 0){
+            board = Array(len).fill().map((e, idx) => idx + 1)
+        }
         durstenfeldShuffle(board)
         console.log(board)
         board.forEach((item, idx) => {
             const sortItem = document.getElementsByClassName(`sorted-${idx+1}`)
             sortItem[0].style.height = `${item / len * 100}%`
             sortItem[0].id = `sort-${item}`
+            const sortedItem = document.getElementById(`sort-${item}`)
+            // console.log(sortItem, sortedItem)
+            // console.log(sortedItem.classList)
+            if (sortedItem.classList.contains("sort-visited")){
+                sortedItem.classList.remove("sort-visited")
+            }
         })
         setArr(board)
     }
@@ -155,7 +164,6 @@ function Sort() {
             const swap = (i) => {
                 const index1 = arrHistory[i][0]
                 const index2 = arrHistory[i][1]
-                console.log("SWAPPING", index1, index2)
                 const itemOne = document.getElementById(`sort-${index1}`)
                 const itemTwo = document.getElementById(`sort-${index2}`)
                 animate(itemOne, itemTwo, true, index1, index2, i)
@@ -189,7 +197,6 @@ function Sort() {
                         tempArr.push(value)
                     }
                     if (tempArr[count] !== copyArr[count]){
-                        console.log("SWAP HERE:", "COUNT", count, "tempArr", tempArr,  "copyArr", copyArr,"SWAPPING VALUES", tempArr[count], copyArr[count] )
                         const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                         const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
                         animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
@@ -199,7 +206,6 @@ function Sort() {
                         const swapIdx = copyArr.indexOf(tempArr[count])
                         copyArr[count] = tempArr[count]
                         copyArr[swapIdx] = value
-                        console.log("SWAPPED COPY", copyArr)
                     }
 
                     count++
@@ -208,7 +214,6 @@ function Sort() {
                     const arr1Val = arr1.shift()
                     tempArr.push(arr1Val)
                     if (tempArr[count] !== copyArr[count]){
-                        console.log("SWAP HERE:", "COUNT", count, "tempArr", tempArr,  "copyArr", copyArr,"SWAPPING VALUES", tempArr[count], copyArr[count] )
                         const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                         const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
                         animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
@@ -218,7 +223,6 @@ function Sort() {
                         const swapIdx = copyArr.indexOf(tempArr[count])
                         copyArr[count] = tempArr[count]
                         copyArr[swapIdx] = value
-                        console.log("SWAPPED COPY", copyArr)
                     }
                     count++
                 }
@@ -226,7 +230,6 @@ function Sort() {
                     const arr2Val = arr2.shift()
                     tempArr.push(arr2Val)
                     if (tempArr[count] !== copyArr[count]){
-                        console.log("SWAP HERE:", "COUNT", count, "tempArr", tempArr,  "copyArr", copyArr,"SWAPPING VALUES", tempArr[count], copyArr[count] )
                         const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                         const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
                         animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
@@ -236,11 +239,9 @@ function Sort() {
                         const swapIdx = copyArr.indexOf(tempArr[count])
                         copyArr[count] = tempArr[count]
                         copyArr[swapIdx] = value
-                        console.log("SWAPPED COPY", copyArr)
                     }
                     count++
                 }
-                console.log("while'd",tempArr)
             }
         }
     }
