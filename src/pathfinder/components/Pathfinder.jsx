@@ -165,7 +165,6 @@ function Pathfinder() {
         const startNode = nodes[start.row][start.col]
         const targetNode = nodes[target.row][target.col]
         const visitedNodes = astar(nodes, startNode, targetNode)
-        console.log(visitedNodes)
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
     }

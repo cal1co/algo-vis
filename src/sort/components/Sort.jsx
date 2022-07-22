@@ -10,8 +10,9 @@ import { radix } from '../algorithms/radix'
 function Sort() {
     const [arr, setArr] = useState([])
     const [len, setLen] = useState(100)
-    const [time, setTime] = useState(22)
-    const [sliderVal, setSliderVal] = useState(3)
+    const [time, setTime] = useState(2)
+    const [sliderVal, setSliderVal] = useState(2)
+    const [timers, setTimers] = useState([])
 
     useEffect(() => {
         const randArr = generateArr(len)
@@ -65,17 +66,19 @@ function Sort() {
             inputArr[j] = temp;
         }
     }
+
     const finisherAnimation = () => {
         for (let i = 0; i < len; i++){
             const item = document.getElementById(`sort-${i + 1}`)
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 item.classList.add("sort-visited")
             }, 5 * i)
             item.classList.remove("sort-visited")
+            timers.push(timeout)
         }
     }
     const animate = (itemOne, itemTwo, swap, index1, index2, i) => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             if (swap){
                 itemOne.style.height = `${index2 / len * 100}%`
                 itemTwo.style.height = `${index1 / len * 100}%`
@@ -84,40 +87,45 @@ function Sort() {
             itemOne.style.outline = '0.5px solid red'
             itemTwo.style.backgroundColor = 'red'
             itemTwo.style.outline = '0.5px solid red'
-            setTimeout(() => {
+            const innerTimeout = setTimeout(() => {
                 itemOne.style.backgroundColor = 'black'
                 itemOne.style.outline = '0.5px solid white'
                 itemTwo.style.backgroundColor = 'black'   
                 itemTwo.style.outline = '0.5px solid white'   
             }, 3)
+            timers.push(innerTimeout)
         }, time * i)
+        timers.push(timeout)
     }
+
     const visualiseBubble = (arrHistory) => {
         for (let i = 0; i <= arrHistory.length; i++){
             if (i === arrHistory.length){
                 console.log("END")
-                setTimeout(() => {
+                const timeout = setTimeout(() => {
                     finisherAnimation()
                 }, time * i)
+                timers.push(timeout)
                 return 
             }
             const index1 = arrHistory[i][0]
             const index2 = arrHistory[i][1]
             const itemOne = document.getElementById(`sort-${index1}`)
             const itemTwo = document.getElementById(`sort-${index2}`)
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 itemOne.style.height = `${index2 / len * 100}%`
                 itemTwo.style.height = `${index1 / len * 100}%`
                 itemOne.style.backgroundColor = 'red'
                 itemTwo.style.backgroundColor = 'red'
-                setTimeout(() => {
+                const innerTimeout = setTimeout(() => {
                     itemOne.style.backgroundColor = 'black'
                     itemTwo.style.backgroundColor = 'black'
                 }, 1)
+                timers.push(innerTimeout)
             }, time * i)
-            
             itemOne.id = `sort-${index2}`
             itemTwo.id = `sort-${index1}`
+            timers.push(timeout)
         }
     }
     const visualiseSelection = (arrHistory) => {
@@ -125,9 +133,10 @@ function Sort() {
             // console.log(arrHistory[i])
             if (i === arrHistory.length){
                 console.log("END")
-                setTimeout(() => {
+                const timeout = setTimeout(() => {
                     finisherAnimation()
                 }, time * i)
+                timers.push(timeout)
                 return 
             }
             const index1 = arrHistory[i][0]
@@ -149,9 +158,10 @@ function Sort() {
         for (let i = 0; i <= arrHistory.length; i++){
             if (i === arrHistory.length){
                 console.log("END")
-                setTimeout(() => {
+                const timeout = setTimeout(() => {
                     finisherAnimation()
                 }, time * i)
+                timers.push(timeout)
                 return
             }
             const index1 = arrHistory[i][0]
@@ -168,9 +178,10 @@ function Sort() {
         for (let i = 0; i <= arrHistory.length; i++){
             if (i === arrHistory.length){
                 console.log("END")
-                setTimeout(() => {
+                const timeout = setTimeout(() => {
                     finisherAnimation()
-                }, time * i)
+                }, i * time * 5)
+                timers.push(timeout)
                 return
             }
 
@@ -187,75 +198,79 @@ function Sort() {
             const currArr = arrHistory[i]
             const arr1 = [...currArr[0]]
             const arr2 = [...currArr[1]]
+            
 
             if (currArr.length === 1){
                 continue;
             }
-            if (arr1.length === 1 && arr2.length === 1){
-                if (arr1[0] > arr2[0]){
-                    swap(i)
-                } 
-            } 
-            if (arr1.length > 1 || arr2.length > 1){
-                const tempArr = []
-                let count = 0
-                const copyArr = [...arr1, ...arr2].flat()
-                while (arr1.length && arr2.length){
-                    let value
+            // const timeout = setTimeout(() => {
+                if (arr1.length === 1 && arr2.length === 1){
                     if (arr1[0] > arr2[0]){
-                        value = arr2.shift()
-                        tempArr.push(value)
-                    } else {
-                        value = arr1.shift()
-                        tempArr.push(value)
-                    }
-                    if (tempArr[count] !== copyArr[count]){
-                        const itemOne = document.getElementById(`sort-${tempArr[count]}`)
-                        const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                        animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
-                        itemOne.id = `sort-${copyArr[count]}`
-                        itemTwo.id = `sort-${tempArr[count]}`
-                        const value = copyArr[count]
-                        const swapIdx = copyArr.indexOf(tempArr[count])
-                        copyArr[count] = tempArr[count]
-                        copyArr[swapIdx] = value
-                    }
+                        swap(i)
+                    } 
+                } 
+                if (arr1.length > 1 || arr2.length > 1){
+                    const tempArr = []
+                    let count = 0
+                    const copyArr = [...arr1, ...arr2].flat()
+                    while (arr1.length && arr2.length){
+                        let value
+                        if (arr1[0] > arr2[0]){
+                            value = arr2.shift()
+                            tempArr.push(value)
+                        } else {
+                            value = arr1.shift()
+                            tempArr.push(value)
+                        }
+                        if (tempArr[count] !== copyArr[count]){
+                            const itemOne = document.getElementById(`sort-${tempArr[count]}`)
+                            const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            itemOne.id = `sort-${copyArr[count]}`
+                            itemTwo.id = `sort-${tempArr[count]}`
+                            const value = copyArr[count]
+                            const swapIdx = copyArr.indexOf(tempArr[count])
+                            copyArr[count] = tempArr[count]
+                            copyArr[swapIdx] = value
+                        }
 
-                    count++
-                }
-                while (arr1.length){
-                    const arr1Val = arr1.shift()
-                    tempArr.push(arr1Val)
-                    if (tempArr[count] !== copyArr[count]){
-                        const itemOne = document.getElementById(`sort-${tempArr[count]}`)
-                        const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                        animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
-                        itemOne.id = `sort-${copyArr[count]}`
-                        itemTwo.id = `sort-${tempArr[count]}`
-                        const value = copyArr[count]
-                        const swapIdx = copyArr.indexOf(tempArr[count])
-                        copyArr[count] = tempArr[count]
-                        copyArr[swapIdx] = value
+                        count++
                     }
-                    count++
-                }
-                while (arr2.length){
-                    const arr2Val = arr2.shift()
-                    tempArr.push(arr2Val)
-                    if (tempArr[count] !== copyArr[count]){
-                        const itemOne = document.getElementById(`sort-${tempArr[count]}`)
-                        const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                        animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i)
-                        itemOne.id = `sort-${copyArr[count]}`
-                        itemTwo.id = `sort-${tempArr[count]}`
-                        const value = copyArr[count]
-                        const swapIdx = copyArr.indexOf(tempArr[count])
-                        copyArr[count] = tempArr[count]
-                        copyArr[swapIdx] = value
+                    while (arr1.length){
+                        const arr1Val = arr1.shift()
+                        tempArr.push(arr1Val)
+                        if (tempArr[count] !== copyArr[count]){
+                            const itemOne = document.getElementById(`sort-${tempArr[count]}`)
+                            const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            itemOne.id = `sort-${copyArr[count]}`
+                            itemTwo.id = `sort-${tempArr[count]}`
+                            const value = copyArr[count]
+                            const swapIdx = copyArr.indexOf(tempArr[count])
+                            copyArr[count] = tempArr[count]
+                            copyArr[swapIdx] = value
+                        }
+                        count++
                     }
-                    count++
+                    while (arr2.length){
+                        const arr2Val = arr2.shift()
+                        tempArr.push(arr2Val)
+                        if (tempArr[count] !== copyArr[count]){
+                            const itemOne = document.getElementById(`sort-${tempArr[count]}`)
+                            const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            itemOne.id = `sort-${copyArr[count]}`
+                            itemTwo.id = `sort-${tempArr[count]}`
+                            const value = copyArr[count]
+                            const swapIdx = copyArr.indexOf(tempArr[count])
+                            copyArr[count] = tempArr[count]
+                            copyArr[swapIdx] = value
+                        }
+                        count++
+                    }
                 }
-            }
+            // }, i * time * 5)
+            // timers.push(timeout)
         }
     }
     const visualiseQuick = (arrHistory) => {
@@ -280,13 +295,15 @@ function Sort() {
                     arrHistory[i][swapIdx] = value
                     // console.log("CHANGED VAL", arrHistory[i][swapIdx])
                 } else {
-                    setTimeout(() => {
+                    const timeout = setTimeout(() => {
                         const item = document.getElementById(`sort-${arrHistory[i][j]}`)
                         item.style.backgroundColor = 'red'
-                        setTimeout(() => {
+                        const innerTimeout = setTimeout(() => {
                             item.style.backgroundColor = 'black'
                         }, 5)
+                        timers.push(innerTimeout)
                     }, (i+1) * j)
+                    timers.push(timeout)
                 }
             }
             
@@ -325,9 +342,6 @@ function Sort() {
         console.log(sortedArr)
         visualiseRadix(sortedArr)
     }
-
-  
-
 
     const handleSlider = (ev) => {
         // console.log(ev.target.value)
@@ -383,10 +397,12 @@ function Sort() {
 
         }
     }
-
     const handleSpeed = (ev) => {
         const value = ev.target.value
         setTime(value)
+    }
+    const handleStartStop = () => {
+
     }
 
     return (
@@ -410,13 +426,13 @@ function Sort() {
             <div className="length-slider">
                 <form action="post">
                     <label htmlFor="sample-size">sample size</label>
-                    <input id="sample-size" name="sample-size" type="range" min="0" max="6" step="1" value={sliderVal} onChange={handleSlider}/>
+                    <input id="sample-size" name="sample-size" type="range" min="0" max="5" step="1" value={sliderVal} onChange={handleSlider}/>
                 </form>
             </div>
             <div className="time-slider">
                 <form action="post">
                     <label htmlFor="speed-size">speed</label>
-                    <input id="speed-size" name="speed-size" type="range" min="10" max="200" step="5" value={time} onChange={handleSpeed}/>
+                    <input id="speed-size" name="speed-size" type="range" min="10" max="150" step="5" value={time} onChange={handleSpeed}/>
                 </form>
             </div>
         </div>
