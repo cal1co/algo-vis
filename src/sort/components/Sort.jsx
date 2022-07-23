@@ -435,6 +435,11 @@ function Sort() {
                     <input id="speed-size" name="speed-size" type="range" min="10" max="150" step="5" value={time} onChange={handleSpeed}/>
                 </form>
             </div>
+            <div className="util-butts">
+                <button className="stop-sort">
+                    pause
+                </button>
+            </div>
         </div>
     )
 
