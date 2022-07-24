@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../style/pathfinder.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 import { dijkstra, findShortestPathNodes } from '../algorithms/pathfinding/dijkstra'
 import { astar } from '../algorithms/pathfinding/a-star'
@@ -276,7 +277,7 @@ function Pathfinder() {
             </div>
             <div className="pathfinder-nav">
                 <div className="pathfind-dropdown">
-                    <div className="pathfind-btn" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Algorithms</div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
+                    <div className="pathfind-btn algo-gen" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Algorithms <FontAwesomeIcon icon={faAngleDown}/></div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
                     <div className="pathfind-content" style={{display: showPathfind ? 'contents' : 'none'}}>
                         <div className="dijkstra" onClick={showDijkstras}>Dijkstras</div>
                         <div className="A*" onClick={showAStar}>A*</div>
@@ -285,21 +286,21 @@ function Pathfinder() {
                     </div>
                 </div>
                 <div className="pathfind-dropbown">
-                    <div className="pathfind-btn" onClick={() => setShowWallDrop((showWallDrop * -1) + 1)}>
-                        Wall Generation
+                    <div className="pathfind-btn wall-gen" onClick={() => setShowWallDrop((showWallDrop * -1) + 1)}>
+                        Wall Generation <FontAwesomeIcon icon={faAngleDown}/>
                     </div> 
                     <div className="pathfind-content" style={{display: showWallDrop ? 'contents' : 'none'}}>
-                        <div className="Kruskals" onClick={showKruskals}>Kruskals</div>
-                        <div className="RandomVerticalDivision" onClick={showRandomVerticalDivision}>Random Vertical Division</div>
-                        <div className="Random" onClick={showRandom}>Random</div>
+                        <div className="Kruskals wall-gen" onClick={showKruskals}>Kruskals</div>
+                        <div className="RandomVerticalDivision wall-gen" onClick={showRandomVerticalDivision}>Random Vertical Division</div>
+                        <div className="Random wall-gen" onClick={showRandom}>Random</div>
                     </div>
 
                 </div>
-                <div className="pathfind-btn" onClick={clearBoard}>Clear</div>
-                <div className="pathfind-btn" onClick={clearSolution}>Clear Solution</div>
+                <div className="pathfind-btn clear-all" onClick={clearBoard}>Clear All</div>
+                <div className="pathfind-btn clear-solution" onClick={clearSolution}>Clear Solution</div>
             </div>
             <div className="pathfind-board" onMouseLeave={() => setDragging(false)}>
-                <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'flex'}}><p>Select and algorithm</p></div>
+                <div className="algo-prompt algo-stats" style={{display: showStats ? 'none' : 'flex'}}><p>Select an algorithm</p></div>
                 <div className="algo-stats" style={{display: showStats ? 'flex' : 'none'}}> {algoName} searched <p className="step-stat">{stepLength}</p> nodes and drew a shortest path with length <p className="step-stat">{pathLength}</p></div>
                 {renderBoard()}
             </div>

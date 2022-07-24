@@ -412,10 +412,10 @@ function Sort() {
                 <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
             </div>
             <div className="sort-nav">
-                <button onClick={showBubbleSort}>Bubble Sort</button>
-                <button onClick={showSelectionSort}>Selection Sort</button>
-                <button onClick={showInsertionSort}>Insertion Sort</button>
-                <button onClick={showMergeSort}>Merge Sort</button>
+                <button className="sort-btn" onClick={showBubbleSort}>Bubble Sort</button>
+                <button className="sort-btn" onClick={showSelectionSort}>Selection Sort</button>
+                <button className="sort-btn" onClick={showInsertionSort}>Insertion Sort</button>
+                <button className="sort-btn" onClick={showMergeSort}>Merge Sort</button>
                 {/* <button onClick={showQuickSort}>Quick Sort</button> */}
                 {/* <button onClick={showRadixSort}>Radix Sort</button> */}
             </div>

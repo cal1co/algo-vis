@@ -10,7 +10,7 @@
     height:100vh;
 }
 .pathfinder-nav{
-    background-color: var(--primary);
+    background-color: #333333;
     box-shadow: #0000003d 0 5px 10px;
     width:100vw;
     overflow:none;
@@ -18,6 +18,7 @@
     color:white;
     font-weight:bold;
     display:flex;
+    justify-content:center;
     gap:2em;
 }
 .pathfind-dropdown{
@@ -29,7 +30,7 @@
     border:none;
     color:white;
     text-decoration:none;
-    width:8em;
+    width:9em;
     height:fit-content;
     position:relative;
     top:50%;
@@ -49,7 +50,7 @@
     text-align:left;
     padding:0.75em;
     width:6.5em;
-    background:var(--primary);
+    background:#333333;
     border-bottom:0.5px solid white;
     position:relative;
     z-index:1
@@ -153,4 +154,17 @@
 }
 .step-stat{
     font-weight:bold;
+}
+
+.algo-gen:hover{
+    color:var(--to)
+}
+.wall-gen:hover{
+    color:var(--test);
+}
+.clear-all:hover {
+    color:var(--from);
+}
+.clear-solution:hover{
+    color:var(--follow)
 }
