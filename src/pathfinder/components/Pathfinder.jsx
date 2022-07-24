@@ -279,10 +279,10 @@ function Pathfinder() {
                 <div className="pathfind-dropdown">
                     <div className="pathfind-btn algo-gen" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Algorithms <FontAwesomeIcon icon={faAngleDown}/></div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
                     <div className="pathfind-content" style={{display: showPathfind ? 'contents' : 'none'}}>
-                        <div className="dijkstra" onClick={showDijkstras}>Dijkstras</div>
-                        <div className="A*" onClick={showAStar}>A*</div>
-                        <div className="BFS" onClick={showBFS}>BFS</div>
-                        <div className="DFS" onClick={showDFS}>DFS</div>
+                        <div className="dijkstra algo-gen" onClick={showDijkstras}>Dijkstras</div>
+                        <div className="A* algo-gen" onClick={showAStar}>A*</div>
+                        <div className="BFS algo-gen" onClick={showBFS}>BFS</div>
+                        <div className="DFS algo-gen" onClick={showDFS}>DFS</div>
                     </div>
                 </div>
                 <div className="pathfind-dropbown">
