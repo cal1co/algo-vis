@@ -13,6 +13,7 @@ function Sort() {
     const [time, setTime] = useState(2)
     const [sliderVal, setSliderVal] = useState(2)
     const [timers, setTimers] = useState([])
+    const [started, setStarted] = useState(false)
 
     useEffect(() => {
         const randArr = generateArr(len)
@@ -423,25 +424,28 @@ function Sort() {
                 {/* {renderBoard()} */}
             </div>
 
-            <div className="shuffle-butt">
-                <button className="shuffle-board" onClick={() => shuffleBoard(arr)}>Shuffle Board</button>
-            </div>
-            <div className="length-slider">
-                <form action="post">
-                    <label htmlFor="sample-size">sample size</label>
-                    <input id="sample-size" name="sample-size" type="range" min="0" max="5" step="1" value={sliderVal} onChange={handleSlider}/>
-                </form>
-            </div>
-            <div className="time-slider">
-                <form action="post">
-                    <label htmlFor="speed-size">speed</label>
-                    <input id="speed-size" name="speed-size" type="range" min="10" max="150" step="5" value={time} onChange={handleSpeed}/>
-                </form>
-            </div>
-            <div className="util-butts">
-                <button className="stop-sort">
-                    pause
+            <div className="sort-setting-utils">
+                <div className="length-slider slider">
+                    <form action="post">
+                        <input id="sample-size" name="sample-size" type="range" min="0" max="5" step="1" value={sliderVal} onChange={handleSlider} style={{disabled:'true'}}/>
+                        <label htmlFor="sample-size">sample size</label>
+                    </form>
+                </div>
+                <div className="shuffle-butt">
+                    <button className="shuffle-board" onClick={() => shuffleBoard(arr)}>Shuffle Board</button>
+                </div>
+                <button className="stop-sort" onClick={() => setStarted(true)} style={{display: started ? 'none' : 'block'}}>
+                        Start
+                    </button>
+                <button className="stop-sort" onClick={() => setStarted(false)}style={{display: started ? 'block' : 'none'}}>
+                    Reset
                 </button>
+                <div className="time-slider slider">
+                    <form action="post">
+                        <input id="speed-size" name="speed-size" type="range" min="10" max="100" step="5" value={time} onChange={handleSpeed}/>
+                        <label htmlFor="speed-size">speed</label>
+                    </form>
+                </div>
             </div>
         </div>
     )

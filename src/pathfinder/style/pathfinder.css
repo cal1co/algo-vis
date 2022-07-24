@@ -82,6 +82,11 @@
 .node:hover{
     outline:2px solid var(--primary);
     border-radius:0.25em;
+    /* cursor:grab; */
+    cursor: url(https://cur.cursors-4u.net/others/oth-7/oth697.cur), auto !important;
+}
+.node:active{
+    cursor:grabbing
 }
 
 
