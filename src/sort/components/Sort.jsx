@@ -407,6 +407,9 @@ function Sort() {
 
     return (
         <div className="Sort">
+            <div className="vis-title">
+                <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
+            </div>
             <div className="sort-nav">
                 <button onClick={showBubbleSort}>Bubble Sort</button>
                 <button onClick={showSelectionSort}>Selection Sort</button>

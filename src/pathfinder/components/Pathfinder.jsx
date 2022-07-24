@@ -157,6 +157,7 @@ function Pathfinder() {
         const visitedNodes = dijkstra(nodes, startNode, targetNode)
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
+        setShowPathfind(false)
     }
     const showAStar = () => {
         console.log("A* HERE")
@@ -167,6 +168,7 @@ function Pathfinder() {
         const visitedNodes = astar(nodes, startNode, targetNode)
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
+        setShowPathfind(false)
     }
     const showBFS = () => {
         console.log("BFS HERE")
@@ -177,6 +179,7 @@ function Pathfinder() {
         const visitedNodes = breadthFirstSearch(nodes, startNode, targetNode)
         const shortedPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortedPathNodes)
+        setShowPathfind(false)
     }
     const showDFS = () => {
         console.log('DFS HERE')
@@ -187,6 +190,7 @@ function Pathfinder() {
         const visitedNodes = depthFirstSearch(nodes, startNode, targetNode)
         const shortestPathNodes = findShortestPathNodes(targetNode)
         animateNodes(visitedNodes, shortestPathNodes)
+        setShowPathfind(false)
     }
 
     // Walls
@@ -200,17 +204,19 @@ function Pathfinder() {
         }
     }
     const showKruskals = () => {
-        // clearBoard()
         const wallPath = kruskals(nodes)
         animateWalls(wallPath)
+        setShowWallDrop(false)
     }
     const showRandomVerticalDivision = () => {
         const randomPath = randomVerticalDivision(nodes)
         animateWalls(randomPath)
+        setShowWallDrop(false)
     }
     const showRandom = () => {
         const randomPath = randomWalls(nodes)
         animateWalls(randomPath)
+        setShowWallDrop(false)
     }
 
     // Clear
@@ -265,6 +271,9 @@ function Pathfinder() {
 
     return (
         <div className="pathfinder">
+            <div className="vis-title">
+                <p>Algo-Vis: Pathfinding Algorithm Visualiser</p> 
+            </div>
             <div className="pathfinder-nav">
                 <div className="pathfind-dropdown">
                     <div className="pathfind-btn" onClick={ () => setShowPathfind((showPathfind * -1) + 1)} style={{}}> Algorithms</div>  {/** 0 is false and 1 is true. 0 * -1 is 0 + 1 = 1. 1 * -1 is -1 + 1 = 0 */}
