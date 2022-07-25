@@ -1,9 +1,12 @@
+let arrHistory = []
+
 export const merge = (arr, len=-1) => {
     const n = arr.length
     const midPoint = arr.length / 2
 
     if (n > len){
         len = n
+        arrHistory = []
     }
 
     if (n === 1){
@@ -17,8 +20,6 @@ export const merge = (arr, len=-1) => {
 
     return merger(arrOne, arrTwo, len)
 }
-
-const arrHistory = []
 
 export const merger = (leftArr, rightArr, len) => {
     const tempArr = []
