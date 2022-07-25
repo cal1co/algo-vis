@@ -66,18 +66,18 @@
 - Merge sort recursively splits a list into sublists.
 - Sublists are merged into a list by comparing in desired order through comparing the starting index of sublist a or b, removing and adding the selected index to the new list. 
 
-### Quick Sort **Visualisation Pending**
+### Quick Sort - **Visualisation Pending**
 - Average Time Complexity: O(nlogn)
 - Also divide-and-conquer
 - A 'pivot' is selected in an array and sub arrays are created relative to the left and right of this pivot. 
 - Recursively, this process is repeated, sorting the partitioned left and right sub arrays. 
 
-### Heap Sort **Visualisation Pending**
+### Heap Sort - **Visualisation Pending**
 - Average Time Complexity: O(nlogn)
 - A better Selection sort.
 - Being in the name, rather than iterating through an array, heap sort, uses a **heap**, being able to find the largest element of a heap in a given step. 
 
-### Radix Sort **Visualisation Pending**
+### Radix Sort - **Visualisation Pending**
 - Average Time Complexity: O(n * k/d)
 - Radix: the number of unique digits. i.e. 0 = 1, 10 = 2, 100 = 3
 - Sorts all values by radix. 
@@ -87,7 +87,7 @@
 - step 4: [0, 41, 93, 123, 232] sorting by 100's
 - Very cool!
 
-### Bogo Sort **Visualisation Pending**
+### Bogo Sort - **Visualisation Pending**
 - Average Time Complexity: (n*n!)
 - Worst Case Time Complexity: Infinity
 - A permutation of array is created and checked to be in sorted order, if not, repeat.
@@ -96,13 +96,13 @@
 
 ## Game Theory 
 
-### Minimax: *TIC-TAC-TOE* **Visualisation Pending**
+### Minimax: *TIC-TAC-TOE* - **Visualisation Pending**
 - An algorithm that maximises the possiblity of winning or one that minimises the posibility of losing.
 - Minimax calculates a tree of possible moves that can be made by a player and itself. 
 - Scores are given to the nodes of the calculated trees, allowing the algorithm to in a way ***predict the future***. woah!
 
 
-### Backtracking (DFS): *Sudoku*  **Visualisation Pending**
+### Backtracking (DFS): *Sudoku* - **Visualisation Pending**
 - A brute force approach to solving a given sudoku puzzle.
 - Values 1-9 are checked and verified until a board is solved. 
 
