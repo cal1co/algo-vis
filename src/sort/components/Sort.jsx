@@ -14,6 +14,7 @@ function Sort() {
     const [sliderVal, setSliderVal] = useState(2)
     const [timers, setTimers] = useState([])
     const [started, setStarted] = useState(false)
+    const [choiceSet, setChoiceSet] = useState(false)
     const [shuffled, setShuffled] = useState(false)
     const [bubbleSet, setBubbleSet] = useState(false)
     const [selectionSet, setSelectionSet] = useState(false)
@@ -77,12 +78,18 @@ function Sort() {
 
     const finisherAnimation = () => {
         for (let i = 0; i < len; i++){
+            
             const item = document.getElementById(`sort-${i + 1}`)
             const timeout = setTimeout(() => {
                 item.classList.add("sort-visited")
             }, 5 * i)
             item.classList.remove("sort-visited")
             timers.push(timeout)
+            if (i === len - 1) {
+                setTimeout(() => {
+                    setStarted(false)
+                }, 5 * i)
+            }
         }
     }
     const animate = (itemOne, itemTwo, swap, index1, index2, i) => {
@@ -411,7 +418,12 @@ function Sort() {
     }
     const handleStartStop = () => {
         setShuffled(false)
-        if (started) setStarted(false)
+        if (started) {
+            setStarted(false)
+            while (timers.length){
+                window.clearTimeout(timers.shift())
+            }
+        }
         if (!started) {
             setStarted(true)
             if (bubbleSet) showBubbleSort()
@@ -445,6 +457,7 @@ function Sort() {
             setInsertionSet(false)
             setMergeSet(true)
         }
+        setChoiceSet(true)
     }
 
     return (
@@ -475,7 +488,7 @@ function Sort() {
                 <div className="shuffle-butt">
                     <button className="shuffle-board" onClick={() => shuffleBoard(arr)} disabled={started ? true : false}>Shuffle Board</button>
                 </div>
-                <button className="stop-sort" onClick={handleStartStop} style={{display: started ? 'none' : 'block'}} disabled={shuffled ? false : true}>
+                <button className="stop-sort" onClick={handleStartStop} style={{display: started ? 'none' : 'block'}} disabled={shuffled && choiceSet ? false : true}>
                         Start
                     </button>
                 <button className="stop-sort" onClick={handleStartStop}style={{display: started ? 'block' : 'none'}}>
