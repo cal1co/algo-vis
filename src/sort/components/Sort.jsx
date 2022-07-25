@@ -14,6 +14,12 @@ function Sort() {
     const [sliderVal, setSliderVal] = useState(2)
     const [timers, setTimers] = useState([])
     const [started, setStarted] = useState(false)
+    const [shuffled, setShuffled] = useState(false)
+    const [bubbleSet, setBubbleSet] = useState(false)
+    const [selectionSet, setSelectionSet] = useState(false)
+    const [insertionSet, setInsertionSet] = useState(false)
+    const [mergeSet, setMergeSet] = useState(false)
+
 
     useEffect(() => {
         const randArr = generateArr(len)
@@ -44,6 +50,7 @@ function Sort() {
     }
 
     const shuffleBoard = (board=arr) => {
+        setShuffled(true)
         if (board.length === 0){
             board = Array(len).fill().map((e, idx) => idx + 1)
         }
@@ -403,7 +410,41 @@ function Sort() {
         setTime(value)
     }
     const handleStartStop = () => {
-
+        setShuffled(false)
+        if (started) setStarted(false)
+        if (!started) {
+            setStarted(true)
+            if (bubbleSet) showBubbleSort()
+            if (selectionSet) showSelectionSort()
+            if (insertionSet) showInsertionSort()
+            if (mergeSet) showMergeSort()
+        }
+    }
+    const switchAlgo = (algo) => {
+        if ( algo === 'b' ) {
+            setBubbleSet(true)
+            setSelectionSet(false)
+            setInsertionSet(false)
+            setMergeSet(false)
+        }
+        if ( algo === 's' ) {
+            setBubbleSet(false)
+            setSelectionSet(true)
+            setInsertionSet(false)
+            setMergeSet(false)
+        }
+        if ( algo === 'i' ) {
+            setBubbleSet(false)
+            setSelectionSet(false)
+            setInsertionSet(true)
+            setMergeSet(false)
+        }
+        if ( algo === 'm' ) {
+            setBubbleSet(false)
+            setSelectionSet(false)
+            setInsertionSet(false)
+            setMergeSet(true)
+        }
     }
 
     return (
@@ -412,10 +453,10 @@ function Sort() {
                 <h1 className="algo-type">Algo-Vis: Sorting Algorithm Visualiser</h1> 
             </div>
             <div className="sort-nav">
-                <div className="sort-btn" onClick={showBubbleSort}>Bubble Sort</div>
-                <div className="sort-btn" onClick={showSelectionSort}>Selection Sort</div>
-                <div className="sort-btn" onClick={showInsertionSort}>Insertion Sort</div>
-                <div className="sort-btn" onClick={showMergeSort}>Merge Sort</div>
+                <div className="sort-btn bubble" onClick={() => switchAlgo('b')} style={{color: bubbleSet ? '#03997E' : 'white'}}>Bubble Sort</div>
+                <div className="sort-btn selection" onClick={() => switchAlgo('s')}style={{color: selectionSet ? '#03997E' : 'white'}}>Selection Sort</div>
+                <div className="sort-btn insertion" onClick={() => switchAlgo('i')} style={{color: insertionSet ? '#03997E' : 'white'}}>Insertion Sort</div>
+                <div className="sort-btn merge" onClick={() => switchAlgo('m')} style={{color: mergeSet ? '#03997E' : 'white'}}>Merge Sort</div>
                 {/* <button onClick={showQuickSort}>Quick Sort</button> */}
                 {/* <button onClick={showRadixSort}>Radix Sort</button> */}
             </div>
@@ -432,12 +473,12 @@ function Sort() {
                     </form>
                 </div>
                 <div className="shuffle-butt">
-                    <button className="shuffle-board" onClick={() => shuffleBoard(arr)}>Shuffle Board</button>
+                    <button className="shuffle-board" onClick={() => shuffleBoard(arr)} disabled={started ? true : false}>Shuffle Board</button>
                 </div>
-                <button className="stop-sort" onClick={() => setStarted(true)} style={{display: started ? 'none' : 'block'}}>
+                <button className="stop-sort" onClick={handleStartStop} style={{display: started ? 'none' : 'block'}} disabled={shuffled ? false : true}>
                         Start
                     </button>
-                <button className="stop-sort" onClick={() => setStarted(false)}style={{display: started ? 'block' : 'none'}}>
+                <button className="stop-sort" onClick={handleStartStop}style={{display: started ? 'block' : 'none'}}>
                     Reset
                 </button>
                 <div className="time-slider slider">
