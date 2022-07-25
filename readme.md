@@ -96,10 +96,30 @@
 
 ## Game Theory 
 
-### *TIC-TAC-TOE:* Mini-Max 
+### Minimax: *TIC-TAC-TOE* **Visualisation Pending**
+- An algorithm that maximises the possiblity of winning or one that minimises the posibility of losing.
+- Minimax calculates a tree of possible moves that can be made by a player and itself. 
+- Scores are given to the nodes of the calculated trees, allowing the algorithm to in a way ***predict the future***. woah!
 
-### *Sudoku:* Backtracking (DFS) 
+
+### Backtracking (DFS): *Sudoku*  **Visualisation Pending**
+- A brute force approach to solving a given sudoku puzzle.
+- Values 1-9 are checked and verified until a board is solved. 
+
 
 ## Misc 
 
-### Wave Function Collapse (WFC) and Procedural Content Generation (PCG)
+### Wave Function Collapse (WFC) and Procedural Content Generation (PCG) **Visualisation Pending**
+- My favourite algorithm!
+- An image-based PCG (Procedural Content Generation) algorithm that identifies constraints from an input and generates a similar output.
+- Imagine an input of tiles. Each tile can connect to only a certain few other types of tiles. 
+- Example: 
+- Water can connect to water and sand.
+- Sand can connect to sand, water, and grass.
+- Grass can connect to sand, and grass.
+- In a simple case, a 2d space is being created. Uncertainty is equal amongst all tiles
+- Selecting a random area, a tile is placed. 
+- Since a tile is placed, the surrounding entropy is now lowered (the possible surrounding tiles).
+- A tile is placed, uncertainty is lowered - less types of tiles are allowed to be placed.
+- Tiles are placed amongst other tiles creating an island. 
+
