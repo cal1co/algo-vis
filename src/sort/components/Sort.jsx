@@ -473,7 +473,7 @@ function Sort() {
                 {/* <button onClick={showQuickSort}>Quick Sort</button> */}
                 {/* <button onClick={showRadixSort}>Radix Sort</button> */}
             </div>
-
+        
             <div className="sort-board" id="board-div">
                 {/* {renderBoard()} */}
             </div>
