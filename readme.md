@@ -33,7 +33,7 @@
 ## Maze Generation:
 - There are many ways of generating mazes
 
-### Kruskals
+### Kruskals - **Visualisation Pending**
 - Kruskals algorithm creates a minimum spanning tree.
 - A minimum spanning tree or *'MST'* is a tree which connects nodes to one another without creating a cycle (edges that belong to the same tree). 
 - Selecting the smallest edge (or random if edges are of equal weights), nodes are connected with one another in a way which creates a tree. 
