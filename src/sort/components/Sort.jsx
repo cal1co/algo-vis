@@ -409,13 +409,13 @@ function Sort() {
     return (
         <div className="Sort">
             <div className="vis-title">
-                <p>Algo-Vis: Sorting Algorithm Visualiser</p> 
+                <h1 className="algo-type">Algo-Vis: Sorting Algorithm Visualiser</h1> 
             </div>
             <div className="sort-nav">
-                <button className="sort-btn" onClick={showBubbleSort}>Bubble Sort</button>
-                <button className="sort-btn" onClick={showSelectionSort}>Selection Sort</button>
-                <button className="sort-btn" onClick={showInsertionSort}>Insertion Sort</button>
-                <button className="sort-btn" onClick={showMergeSort}>Merge Sort</button>
+                <div className="sort-btn" onClick={showBubbleSort}>Bubble Sort</div>
+                <div className="sort-btn" onClick={showSelectionSort}>Selection Sort</div>
+                <div className="sort-btn" onClick={showInsertionSort}>Insertion Sort</div>
+                <div className="sort-btn" onClick={showMergeSort}>Merge Sort</div>
                 {/* <button onClick={showQuickSort}>Quick Sort</button> */}
                 {/* <button onClick={showRadixSort}>Radix Sort</button> */}
             </div>

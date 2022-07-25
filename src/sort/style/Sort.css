@@ -13,6 +13,7 @@
     color:white;
     font-weight:bold;
     display:flex;
+    justify-content:center;
     gap:2em;
 }
 
@@ -100,6 +101,25 @@ input[type="range"]::-webkit-slider-thumb {
    }
    
 
+
+.sort-btn{
+    text-align:center;
+    background:none;
+    border:none;
+    color:white;
+    text-decoration:none;
+    width:9em;
+    height:fit-content;
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    height:4vh;
+    transition: 0.2s ease-in-out; 
+}
+.sort-btn:hover{
+    color:rgba(255, 255, 255, 0.86);
+    cursor:pointer;
+}
 .stop-sort{
-    width:3rem;
+    width:4em;
 }

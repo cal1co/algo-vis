@@ -273,7 +273,7 @@ function Pathfinder() {
     return (
         <div className="pathfinder">
             <div className="vis-title">
-                <p>Algo-Vis: Pathfinding Algorithm Visualiser</p> 
+                <h1 className="algo-type">Algo-Vis: Pathfinding Algorithm Visualiser</h1> 
             </div>
             <div className="pathfinder-nav">
                 <div className="pathfind-dropdown">

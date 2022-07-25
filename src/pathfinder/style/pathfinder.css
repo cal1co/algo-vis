@@ -169,3 +169,7 @@
 .clear-solution:hover{
     color:var(--follow)
 }
+.algo-type{
+    margin:0;
+    margin-left:0.25em;
+}
