@@ -41,23 +41,58 @@
 - Creating a MST ensures that the maze is always solvable due to the fact that all nodes are connected in a way inwhich ensures a path between two nodes
 
 ## Sorting 
+- Simply, a sorting algorithm is an algorithm that puts each element of a list into an order. 
+- There are countless types and variations each with different uses and time complexities depending on the task.
 
-### Bubble Sort 
+### Bubble Sort
+- Average Time Complexity: O(n^2)
+- Bubble sort is extremely easy to code, however quite slow in terms of time complexity.
+- Iteratively steps through a list, comparing two elements and swapping the two into the desired order.
 
 ### Selection Sort
+- Average Time Complexity: O(n^2)
+- Like bubble sort, slow in terms of time complexity.
+- Iterates through a list, selecting the smallest value. Once the smallest value of the iteration is found, it is sorted to the front of the list.
 
 ### Insertion Sort
+- Average Time Complexity: O(n^2)
+- Slow in terms of time complexity but can have advantages for smaller sample sizes.
+- Iterating through a list, an item is selected and repeatedly sorted amonst already sorted items.
 
 ### Merge Sort
+- Average Time Complexity: O(nlogn)
+- divide-and-conquer !
+- Far more efficient than the ones seen so far.
+- Merge sort recursively splits a list into sublists.
+- Sublists are merged into a list by comparing in desired order through comparing the starting index of sublist a or b, removing and adding the selected index to the new list. 
 
-### Quick Sort
+### Quick Sort **Visualisation Pending**
+- Average Time Complexity: O(nlogn)
+- Also divide-and-conquer
+- A 'pivot' is selected in an array and sub arrays are created relative to the left and right of this pivot. 
+- Recursively, this process is repeated, sorting the partitioned left and right sub arrays. 
 
-### Heap Sort
+### Heap Sort **Visualisation Pending**
+- Average Time Complexity: O(nlogn)
+- A better Selection sort.
+- Being in the name, rather than iterating through an array, heap sort, uses a **heap**, being able to find the largest element of a heap in a given step. 
 
-### Radix Sort
+### Radix Sort **Visualisation Pending**
+- Average Time Complexity: O(n * k/d)
+- Radix: the number of unique digits. i.e. 0 = 1, 10 = 2, 100 = 3
+- Sorts all values by radix. 
+- Example: [123, 41, 232, 4, 0, 93]
+- step 1: [0, 41, 232, 123, 93] sorting by 0's
+- step 3: [0, 123, 41, 232, 93] sorting by 10's
+- step 4: [0, 41, 93, 123, 232] sorting by 100's
+- Very cool!
 
-### Bogo Sort
-
+### Bogo Sort **Visualisation Pending**
+- Average Time Complexity: (n x n!)
+- Worst Case Time Complexity: Infinity
+- A permutation of array is created and checked to be in sorted order, if not, repeat.
+- This can work on the first try or have a run time that lasts longer than the universe has existed. 
+- Might not ever represent this one. Stupid idea, very cool.
 
 ## Game Theory 
 
