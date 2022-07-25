@@ -109,7 +109,7 @@ function Sort() {
                 itemTwo.style.outline = '0.5px solid white'   
             }, 5)
             timers.push(innerTimeout)
-        }, time * i)
+        }, time * i * 1.25)
         timers.push(timeout)
     }
 
