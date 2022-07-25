@@ -88,7 +88,7 @@
 - Very cool!
 
 ### Bogo Sort **Visualisation Pending**
-- Average Time Complexity: (n x n!)
+- Average Time Complexity: (n*n!)
 - Worst Case Time Complexity: Infinity
 - A permutation of array is created and checked to be in sorted order, if not, repeat.
 - This can work on the first try or have a run time that lasts longer than the universe has existed. 
