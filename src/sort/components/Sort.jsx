@@ -195,7 +195,7 @@ function Sort() {
                 console.log("END")
                 const timeout = setTimeout(() => {
                     finisherAnimation()
-                }, i * time * 5)
+                }, i * time * 10)
                 timers.push(timeout)
                 return
             }
@@ -205,7 +205,7 @@ function Sort() {
                 const index2 = arrHistory[i][1]
                 const itemOne = document.getElementById(`sort-${index1}`)
                 const itemTwo = document.getElementById(`sort-${index2}`)
-                animate(itemOne, itemTwo, true, index1, index2, i)
+                animate(itemOne, itemTwo, true, index1, index2, i * 10)
                 itemOne.id = `sort-${index2}`
                 itemTwo.id = `sort-${index1}`
             }
@@ -240,7 +240,7 @@ function Sort() {
                         if (tempArr[count] !== copyArr[count]){
                             const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                             const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 10)
                             itemOne.id = `sort-${copyArr[count]}`
                             itemTwo.id = `sort-${tempArr[count]}`
                             const value = copyArr[count]
@@ -257,7 +257,7 @@ function Sort() {
                         if (tempArr[count] !== copyArr[count]){
                             const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                             const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 10)
                             itemOne.id = `sort-${copyArr[count]}`
                             itemTwo.id = `sort-${tempArr[count]}`
                             const value = copyArr[count]
@@ -273,7 +273,7 @@ function Sort() {
                         if (tempArr[count] !== copyArr[count]){
                             const itemOne = document.getElementById(`sort-${tempArr[count]}`)
                             const itemTwo = document.getElementById(`sort-${copyArr[count]}`)
-                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 5)
+                            animate(itemOne, itemTwo, true, tempArr[count], copyArr[count], i * 10)
                             itemOne.id = `sort-${copyArr[count]}`
                             itemTwo.id = `sort-${tempArr[count]}`
                             const value = copyArr[count]
