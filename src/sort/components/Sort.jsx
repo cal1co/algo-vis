@@ -107,7 +107,7 @@ function Sort() {
                 itemOne.style.outline = '0.5px solid white'
                 itemTwo.style.backgroundColor = 'black'   
                 itemTwo.style.outline = '0.5px solid white'   
-            }, 3)
+            }, 5)
             timers.push(innerTimeout)
         }, time * i)
         timers.push(timeout)
