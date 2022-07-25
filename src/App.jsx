@@ -23,9 +23,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        
-        <Link to='/'>Pathfind</Link>
-        <Link to='/sort'>Sort</Link>
+        <div className="route-links">
+          <Link to='/'>Pathfind</Link>
+          <Link to='/sort'>Sort</Link>
+        </div>
         
         <Routers/>
       </Router>

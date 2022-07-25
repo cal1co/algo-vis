@@ -16,3 +16,15 @@
     top:50%;
     transform:translateY(-50%)
 }
+
+.route-links{
+    display:flex;
+    gap:1em;
+    background-color:#333333;
+}
+.route-links > * {
+    color:white;
+}
+.route-links > *:hover {
+    color:cadetblue
+}
